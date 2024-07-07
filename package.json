@@ -5,10 +5,10 @@
   "name": "ecommerce",
   "version": "1.0.0",
   "description": "",
-  "main": "app.js",
+  "main": "index.js",
   "scripts": {
     "server" : "nodemon app.js",
-    "start" : "set NODE_ENV=localhost & npm run server",
+    "start": "node index.js",
     "production" : "set NODE_ENV=production & npm run server",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
