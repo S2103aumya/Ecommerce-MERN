@@ -1,0 +1,80 @@
+<% layout("/layouts/boilerplate") %> <%= success%>
+
+<div class="box col-6 offset-3 mt-3">
+    <h3>Edit the cart:</h3>
+    <form method="POST" action="/carts/<%= cart._id %>?_method=PUT"  novalidate
+        class="needs-validation" enctype="multipart/form-data">
+        <div class="mb-3">
+            <label for="title" class="form-label">Title : </label>
+            <input
+              type="text"
+              name="cart[title]"
+              value="<%= cart.title %>"
+              class="form-control"
+              required
+            />
+            <div class="valid-feedback">Title Looks good!</div>
+          </div>
+    
+          <div class="mb-3">
+            <label for="description" class="form-label">Description : </label>
+            <textarea
+              name="cart[description]"
+              placeholder="Enter Description"
+              class="form-control"
+              required
+            >
+          <%=cart.description %></textarea
+            >
+            <div class="invalid-feedback">Please enter a short description!</div>
+          </div>
+    
+          
+          <div class="mb-3">
+            <% if (cart.image) { %>
+                <img src="<%= cart.image %>" alt="Cart Image" style="max-width: 20%; height: auto;"/>
+            <% } %>
+        </div>
+          <div class="mb-3">
+            <label for="imageUrl" class="form-label">Upload New Image</label>
+            <input
+              name="image" type="file"  class="form-control"/>
+              required
+          </div> 
+    
+          <div class="row">
+            <div class="mb-3 col-md-4">
+              <label for="price" class="form-label">Price : </label>
+              <input
+                name="cart[price]"
+                type="number"
+                value="<%= cart.price %>"
+                class="form-control"
+                required
+              />
+              <div class="invalid-feedback">Price should be valid!</div>
+            </div>
+    
+            <div class="mb-3 col-md-8">
+              <label for="category" class="form-label">Category : </label>
+              <input
+                name="cart[category]"
+                type="text"
+                value="<%= cart.category %>"
+                class="form-control"
+                required
+              />
+              <div class="invalid-feedback">Country name should be valid!</div>
+            </div>
+          </div>
+    
+          <button class="btn btn-danger">Make Changes</button>
+        </form>
+      </div>
+    </div>
+
+
+
+
+
+

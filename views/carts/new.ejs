@@ -1,0 +1,67 @@
+<% layout("/layouts/boilerplate") %>
+
+<div class="box col-6 offset-3 mt-3 bg-body-tertiary p-3">
+    <form method="POST" action="/carts" class="needs-validation" novalidate enctype="multipart/form-data">
+        <h3>Add new Cart</h3>
+        <div class="mb-3">
+            <label for="title" class="form-label">Title : </label>
+            <input
+              name="cart[title]"
+              type="text"
+              placeholder="Enter Title"
+              class="form-control"
+              required
+            />
+            <div class="valid-feedback">Title Looks Good!</div>
+            <div class="invalid-feedback">Title Must be Required!</div>
+        </div>
+        <div class="mb-3">
+            <label for="description" class="form-label">Description : </label>
+            <textarea
+              name="cart[description]"
+              class="form-control"
+              required
+            ></textarea>
+            <div class="invalid-feedback">Please enter a short description!</div>
+          </div>
+          <div class="mb-3">
+            <label for="imageUrl" class="form-label">Upload cart Image</label>
+            <input
+              name="image"
+              placeholder="Enter image URL/Link"
+              type="file"
+              class="form-control"
+              required
+            />
+          </div> 
+          <div class="row">
+            <div class="mb-3 col-md-4">
+              <label for="price" class="form-label">Price : </label>
+              <input
+                name="cart[price]"
+              
+                placeholder="1200"
+                class="form-control"
+                required
+              />
+              <div class="invalid-feedback">Price should be valid!</div>
+            </div>
+    
+            <div class="mb-3 col-md-8">
+              <label for="country" class="form-label">Category : </label>
+              <input
+                name="cart[category]"
+                type="text"
+                placeholder="XL"
+                class="form-control"
+                required
+              />
+              <div class="invalid-feedback">Category Name should be valid!</div>
+            </div>
+          </div>
+    
+          <button class="btn btn-dark add-btn mt-3">Add</button>
+          <br /><br />
+        </form>
+      </div>
+    </div>

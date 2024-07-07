@@ -1,0 +1,57 @@
+<% layout("/layouts/boilerplate") %>  
+
+<div class="bg-body-tertiary">
+    <div class="top-cont mt-3">
+        <div class="top1">
+            <h1>WESTERN WEAR</h1>
+            <hr>
+            <h5>Min 30% Off</h5>
+            
+        </div>
+        <img src="/images/bgecom.png" />
+    </div>
+    
+    <div class="shop">
+        <h1>CRA<span style="color: red; font-size: 5.5vw;">Z</span>Y DEALS</h1>
+        <h4 class="mb-2">Soak In The Savings</h4>
+    </div>
+    <div class="row row-cols-lg-3 row-cols-md-2 row-cols-sm-1 mt-3">
+        <% for(let cart of carts) { %>
+            <a href="/carts/<%= cart._id %>" class="listing-link">
+            <div class="card col listing-card mb-2">
+                <img src="<%= cart.image %>" class="card-img-top" 
+                alt="cart-image" style="height: 20rem">
+    
+                <div class="card-img-overlay"></div>
+    
+                <div class="card-body">
+                    <p class="card-text">
+                        <b><%=cart.title%></b> <br />
+                        <b>&#8377;<%= cart.price.toLocaleString("en-IN") %></b>
+                    <i class="taxes" style="color: red;">&nbsp &nbsp (18% OFF)</i>
+                </p>
+            </div>
+        </div>
+    </a>
+    <% } %>
+    </div>
+    <div class="d-flex justify-content-end mb-3">
+        <form method="GET" action="/carts/new">
+            <button class="btn btn-secondary mb-3 mt-3 me-auto" >CREATE NEW CART</button>
+        </form>
+    </div>
+</div>
+<div>
+    <div class="bottom-cont">
+        <img src="/images/myntrabottom.png" />
+        <div class="bottom1">
+            <h1>MORE KNOCKOUT OFFERS WAITING</h1>
+            <h4>Only on <i class="fa-solid fa-m" style="color:orangered; font-weight: bold;"></i> app</h4>
+            <div class="bottom-btn">
+                <h4>Download Now</h4>
+                &nbsp<button type="button" class="btn btn-light">Get it on<br><b>Google Play</b></button>
+                &nbsp&nbsp<button type="button" class="btn btn-light">Download on the<br><b>App Store</b></button>
+            </div>
+        </div>
+    </div>
+</div>

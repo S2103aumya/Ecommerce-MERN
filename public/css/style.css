@@ -1,0 +1,172 @@
+*{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+.container{
+    width: 100%;
+}
+html,css{
+    height: 100%;
+    width: 100%;
+}
+.container-fluid i{
+    font-size: 3vw;
+    margin-right: 5vw;
+}
+.box li{
+    font-weight: bold;
+}
+
+/*footer */
+.f-info{
+    min-height: 30vh;
+    margin-top: 5vw;
+}
+.div-box{
+    display: flex;
+    justify-content: space-between;
+    padding: 3vw;
+    flex-wrap: wrap;
+}
+.div-box ul{
+    list-style: none;
+}
+.div-box li{
+    color: rgb(101, 94, 94);
+}
+.f-info-social{
+    display: flex;
+    flex-direction: column;
+}
+.icons i {
+    margin-right: 1.5vw;
+    font-size: 2vw;
+    color: rgb(101, 94, 94);
+}
+.cont p{
+    color:rgb(101, 94, 94);
+}
+.f-info-bottom{
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    padding: 2vw;
+}
+.f-info-bottom a{
+    text-decoration: none;
+}
+/* show.ejs */
+.buttons {
+    display: flex;
+    gap:5vw;
+}
+.buttons a{
+    text-decoration: none;
+}
+
+/*index.js*/
+.top-cont {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: left;
+}
+.top-cont img{
+    height: auto;
+    width: 100%;
+    z-index:0.5;
+}
+.top1{
+    z-index:1;
+    position: absolute;
+    padding: 5vw;
+    text-align: center;
+}
+.top1 h1 {
+    font-weight: 700;
+    font-size: 5vw;
+}
+.listing-link {
+    text-decoration: none;
+}
+.shop{
+    text-align: center;
+}
+.shop h1{
+    font-size: 4.5vw;
+    font-weight: 700;
+    color: rgb(110, 102, 102);
+}
+
+/* bottom*/
+.bottom-cont{
+    height: 20vw;
+    border:4px dotted skyblue;
+    display: flex;
+    padding: 2vw;
+}
+.bottom1{
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    padding: 1vw;
+}
+.bottom1 h1{
+    color: rgb(22, 117, 151);
+    font-size: 2.5vw;
+    font-weight: 800;
+}
+.bottom-btn{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+}
+.bottom-btn button{
+    width: 15vw;
+}
+
+/*signup & login*/
+.button{
+    background-color: rgb(243, 79, 106);
+    color: white;
+}
+
+
+.icon-text {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+    color: inherit;
+    width: 20px;
+}
+.icon-text i {
+    font-size: 15px;
+    margin-right: 2px;
+}
+.nav-right{
+    display: flex;
+    gap:4vw;
+}
+
+.logsig{
+    background-color:#fff; 
+    margin-left: auto;
+    z-index: 2;
+    visibility: hidden; 
+    position: absolute;
+    top:12%;
+    padding: 2vw;
+    right:2%;
+    border: 2px solid transparent; /* Transparent border */
+    box-shadow:inset 0 0 10px 5px rgb(202, 192, 192);
+}
+.btn-text{
+    text-decoration: none;
+    color: inherit;
+}

@@ -1,0 +1,30 @@
+<% layout("layouts/boilerplate") %>
+
+<div class="box col-6 offset-3 mt-3 bg-body-tertiary p-3" style="border: 2px gre;">
+    <h1>Login</h1>
+    <div class="mb-3">
+        <form action="/login" method="POST" class="needs-validation" novalidate>
+            <label for="username" class="form-label">Username :</label>
+            <input 
+                placeholder="enter username"
+                type="text"
+                name="username"
+                class="form-control"
+                required
+            >
+            <label for="password" class="form-label">Password :</label>
+            <input
+                placeholder="enter password"
+                type="text"
+                name="password"
+                class="form-control"
+                required
+            >
+            <div class="mt-1">
+                <input type="checkbox" id="agree" name="agree" required>
+                <label for="agree">By continuing, you agree to our <span style="color:rgb(238, 112, 133)"><b>terms of use</b></span></label>
+            </div>
+            <button class="btn button mt-3">Login</button>
+        </form>
+    </div>
+</div>

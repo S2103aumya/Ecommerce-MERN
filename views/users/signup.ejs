@@ -1,0 +1,49 @@
+<% layout("/layouts/boilerplate") %>
+
+<div class="box col-6 offset-3 mt-3 bg-body-tertiary p-3">
+    <h3>SignUp on Ecommerce</h3>
+    
+    <form method="POST" action="/signup" class="needs-validation" novalidate>
+        <div class="mb-3">
+            <label for="username" class="form-label">Username : </label>
+            <input
+              type="text"
+              name="username"
+              placeholder="Enter Username"
+              class="form-control"
+              required
+            />
+            <div class="valid-feedback">Title Looks Good!</div>
+            <div class="invalid-feedback">Title Must be Required!</div>
+        </div>
+        <div class="mb-3">
+            <label for="email" class="form-label">Email : </label>
+            <input
+              type="text"
+              placeholder="Enter email"
+              name="email"
+              class="form-control"
+              required
+            />
+            <div class="valid-feedback">Title Looks Good!</div>
+            <div class="invalid-feedback">Title Must be Required!</div>
+        </div>
+        <div class="mb-3">
+            <label for="password" class="form-label">Password : </label>
+            <input
+              type="password"
+              name="password"
+              placeholder="Enter Password"
+              class="form-control"
+              required
+            />
+            <div class="valid-feedback">Title Looks Good!</div>
+            <div class="invalid-feedback">Title Must be Required!</div>
+        </div>
+        <div class="mt-1">
+            <input type="checkbox" id="agree" name="agree" required>
+            <label for="agree">By continuing, you agree to our <span style="color:rgb(238, 112, 133)"><b>terms of use</b></span></label>
+        </div>
+        <button class="btn button mt-3">SignUp</button>
+    </form>
+</div>

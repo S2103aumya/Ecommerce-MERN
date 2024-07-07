@@ -1,0 +1,23 @@
+<% layout("/layouts/boilerplate") %>
+
+<div class="row row-cols-lg-3 row-cols-md-2 row-cols-sm-1 mt-4">
+    <img src="../images/bannermens.png" style="width: auto;" class="mb-4"/>
+    <% for(let cart of carts) { %>
+        <a href="/carts/<%= cart._id %>" class="listing-link">
+        <div class="card col listing-card mb-2">
+            <img src="<%= cart.image %>" class="card-img-top" 
+            alt="cart-image" style="height: 20rem">
+
+            <div class="card-img-overlay"></div>
+
+            <div class="card-body">
+                <p class="card-text">
+                    <b><%=cart.title%></b> <br />
+                    <b>&#8377;<%= cart.price.toLocaleString("en-IN") %></b>
+                <i class="taxes" style="color: red;">&nbsp &nbsp (18% OFF)</i>
+            </p>
+        </div>
+    </div>
+</a>
+<% } %>
+</div>
