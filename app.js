@@ -27,8 +27,9 @@ const multer = require("multer");
 const { storage } =require("./cloudconfig.js");
 const upload = multer({ storage });
 
-const MONGO_URL = "mongodb://127.0.0.1:27017/ecommerce";
-// const dbUrl= process.env.ATLAS_URL;
+// const MONGO_URL = "mongodb://127.0.0.1:27017/ecommerce"
+
+const MONGO_URL= process.env.MONGO_URL;
 
 main()
     .then(()=>{
@@ -38,8 +39,16 @@ main()
         console.log(err)
     });
 
+// async function main() {
+//   await mongoose.connect(dbUrl);
+// }
 async function main() {
-  await mongoose.connect(MONGO_URL);
+    try {
+        await mongoose.connect(MONGO_URL);
+    } catch (err) {
+        console.error("Error during mongoose.connect():", err);
+        throw err;
+    }
 }
 
 app.set("view engine","ejs");
@@ -53,7 +62,7 @@ app.use("/frontend",express.static("frontend.js"));
 
 
 app.get("/",(req,res)=>{
-    res.send("hello route");
+    res.redirect("/carts");
 });
 
 const sessionOptions = {
