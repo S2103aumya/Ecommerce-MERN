@@ -2,13 +2,15 @@ if (process.env.NODE_ENV != "production" ) {
     require('dotenv').config();
 }
 
-const db="mongodb+srv://saumya:nyHOMhuTz37C8DiE@cluster0.lgvu9e7.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0"
-
 const mongoose = require("mongoose");
 const initData = require("./data.js");
 const Cart = require("../models/cart.js");
 
-const MONGO_URL = "mongodb://127.0.0.1:27017/ecommerce";
+// const MONGO_URL = "mongodb://127.0.0.1:27017/ecommerce";
+console.log("ATLAS_URL:", process.env.ATLAS_URL);
+console.log("SECRET:", process.env.SECRET);
+const dbUrl= process.env.ATLAS_URL;
+const secret = process.env.SECRET || 'thisshouldbeabettersecret';
 
 
 main()
@@ -20,7 +22,7 @@ main()
     });
 
 async function main() {
-  await mongoose.connect(MONGO_URL);
+  await mongoose.connect(dbUrl);
 }
 
 const initDB = async()=>{
