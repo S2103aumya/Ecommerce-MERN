@@ -21,6 +21,7 @@ const LocalStrategy = require("passport-local");
 const passportLocalMongoose = require('passport-local-mongoose');
 const User = require("./models/user.js");
 const moment= require("moment");
+const MongoStore = require('connect-mongo');
 const {isLoggedIn,isOwner,isReviewOwner} = require("./middleware.js");
 const {saveRedirectUrl} = require("./middleware.js");
 
@@ -66,11 +67,30 @@ app.get("/",(req,res)=>{
     res.redirect("/carts");
 });
 
-const sessionOptions = {
-    secret: "mysecretcode",
-    resave : false,
-    saveUninitialized : true, 
-};
+const store = MongoStore.create({
+    mongoUrl: MONGO_URL,
+    // mongoUrl:MONGO_URL,
+    crypto: {
+        secret: "process.env.SECRET"
+    },
+    touchAfter: 24 * 3600,
+});
+
+store.on("error", ()=>{
+    console.log("ERROR in MONGO SESSION STORE", err);
+});
+
+const sessionOptions=({
+    store,
+    secret: "abcd",
+    resave: false,
+    saveUninitialized : true,
+    cookie: {
+        expires: Date.now()+ 7*24*60*60*1000,
+        maxAge : 7*24*60*60*1000,
+        httpOnly: true,
+    }
+});
 
 app.use(session(sessionOptions));
 app.use(flash());
