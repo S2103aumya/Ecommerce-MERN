@@ -30,8 +30,10 @@ const { storage } =require("./cloudconfig.js");
 const upload = multer({ storage });
 
 // const MONGO_URL = "mongodb://127.0.0.1:27017/ecommerce"
-
-const MONGO_URL= process.env.MONGO_URL;
+console.log("ATLAS_URL:", process.env.ATLAS_URL);
+console.log("SECRET:", process.env.SECRET);
+const dbUrl= process.env.ATLAS_URL;
+const secret = process.env.SECRET || 'thisshouldbeabettersecret';
 
 main()
     .then(()=>{
@@ -46,7 +48,7 @@ main()
 // }
 async function main() {
     try {
-        await mongoose.connect(MONGO_URL);
+        await mongoose.connect(dbUrl);
     } catch (err) {
         console.error("Error during mongoose.connect():", err);
         throw err;
@@ -68,8 +70,7 @@ app.get("/",(req,res)=>{
 });
 
 const store = MongoStore.create({
-    mongoUrl: MONGO_URL,
-    // mongoUrl:MONGO_URL,
+    mongoUrl: dbUrl,
     crypto: {
         secret: "process.env.SECRET"
     },
@@ -82,7 +83,7 @@ store.on("error", ()=>{
 
 const sessionOptions=({
     store,
-    secret: "abcd",
+    secret,
     resave: false,
     saveUninitialized : true,
     cookie: {
