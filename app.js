@@ -48,7 +48,12 @@ main()
 // }
 async function main() {
     try {
-        await mongoose.connect(dbUrl);
+        await mongoose.connect(dbUrl, {
+            useNewUrlParser: true,
+            useUnifiedTopology: true,
+            serverSelectionTimeoutMS: 5000, // Timeout for server selection
+            socketTimeoutMS: 45000,          // Timeout for socket
+          });
     } catch (err) {
         console.error("Error during mongoose.connect():", err);
         throw err;
