@@ -43,22 +43,10 @@ main()
         console.log(err)
     });
 
-// async function main() {
-//   await mongoose.connect(dbUrl);
-// }
 async function main() {
-    try {
-        await mongoose.connect(dbUrl, {
-            useNewUrlParser: true,
-            useUnifiedTopology: true,
-            serverSelectionTimeoutMS: 5000, // Timeout for server selection
-            socketTimeoutMS: 45000,          // Timeout for socket
-          });
-    } catch (err) {
-        console.error("Error during mongoose.connect():", err);
-        throw err;
-    }
+   await mongoose.connect(dbUrl);
 }
+
 
 app.set("view engine","ejs");
 app.set("views",path.join(__dirname,"views"));
