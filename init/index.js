@@ -3,6 +3,8 @@ if (process.env.NODE_ENV != "production" ) {
 }
 
 const mongoose = require("mongoose");
+const dotenv= require('dotenv');
+dotenv.config({path:'../.env' });
 const initData = require("./data.js");
 const Cart = require("../models/cart.js");
 
