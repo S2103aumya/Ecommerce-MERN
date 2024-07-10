@@ -30,8 +30,7 @@ const { storage } =require("./cloudconfig.js");
 const upload = multer({ storage });
 
 // const MONGO_URL = "mongodb://127.0.0.1:27017/ecommerce"
-console.log("ATLAS_URL:", process.env.ATLAS_URL);
-console.log("SECRET:", process.env.SECRET);
+
 const dbUrl= process.env.ATLAS_URL;
 const secret = process.env.SECRET || 'thisshouldbeabettersecret';
 
