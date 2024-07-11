@@ -29,7 +29,7 @@ async function main() {
 
 const initDB = async()=>{
         await Cart.deleteMany({});
-        initData.data= initData.data.map((obj)=>({...obj,owner:'66866bef542b8557298c5220'}));
+        initData.data= initData.data.map((obj)=>({...obj,owner:'668f7f14789c6313d38ec3b8'}));
         await Cart.insertMany(initData.data);
         // console.log(initData.image);
         console.log("data was initialised");
