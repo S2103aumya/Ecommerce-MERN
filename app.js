@@ -42,9 +42,13 @@ main()
         console.log(err)
     });
 
-async function main() {
-   await mongoose.connect(dbUrl);
-}
+    async function main() {
+        await mongoose.connect(dbUrl, {
+            tlsAllowInvalidCertificates: true, // If you are using self-signed certificates
+            serverSelectionTimeoutMS: 30000, // Increase server selection timeout
+            socketTimeoutMS: 45000,
+        });
+    }
 
 
 app.set("view engine","ejs");
