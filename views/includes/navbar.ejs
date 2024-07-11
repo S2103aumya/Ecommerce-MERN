@@ -39,12 +39,11 @@
     <button class="btn btn-outline-light ms-3">
         <span style="color:rgb(238, 112, 133);">
           <a href="/login" class="btn-text"><b>Login</b></a></span></button>
-  <% } %>
-  <% if(currUser) { %>
+  <% } else { %>
     <button class="btn btn-outline-light ms-3">
         <span style="color:rgb(238, 112, 133);">
           <a href="/logout" class="btn-text"><b>Logout</b></a></span></button>
-  <%} %>
+  <% } %>
 </div>
 
 
