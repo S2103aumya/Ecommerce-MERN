@@ -67,8 +67,10 @@
         <% for(review of cart.reviews) { %>
             <div class="card col-5 ms-2 mb-3">
                 <div class="card-body">
-                  <p class="card-text"><%= review.rating %></p>
+                <p class="card-text">@<%= review.author.username %></p>
+                  <p class="card-text">Rating :<%= review.rating %><i class="fa-solid fa-star" style="color: rgb(185, 185, 13);"></i></p>
                   <p class="card-text"><%= review.comment %></p>
+                  <p class="card-text"><%= review.createdAt %></p>
                 </div>
                 <form method="POST" action="/carts/<%= cart.id%>/reviews/<%=review.id%>?_method=DELETE">
                     <button class="btn btn-dark col-4 mb-1">Delete</button>

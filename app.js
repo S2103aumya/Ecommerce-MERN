@@ -178,7 +178,7 @@ app.get("/carts/kids",async(req,res)=>{
 });
 //show route
 app.get("/carts/:id",async(req,res)=>{
-    console.log(req.owner);
+    console.log(req.owner._id);
     let { id } = req.params;
     const cart = await Cart.findById(id).populate({
         path:"reviews",
