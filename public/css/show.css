@@ -1,0 +1,8 @@
+@media(max-width:999px){
+    .review-cont{
+        width: 100% !important;
+        margin: 0 !important;
+        display: flex;
+        flex-direction: row;
+    }
+}

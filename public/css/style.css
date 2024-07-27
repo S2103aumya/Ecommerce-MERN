@@ -6,17 +6,87 @@
 .container{
     width: 100%;
 }
-html,css{
+html,body{
     height: 100%;
     width: 100%;
+    overflow-x: hidden; 
+
 }
-.container-fluid i{
+/*navbar.ejs*/
+.box1 i{
     font-size: 3vw;
     margin-right: 5vw;
-}
+    width: 100%;
+} 
 .box li{
     font-weight: bold;
 }
+.box1{
+    display: flex;
+}
+.nav-right{
+    display: flex;
+    flex-direction: row;
+    /* justify-content: flex-start; */
+}
+.anc{
+    display: flex;
+    gap: 2.5vw;
+}
+.form-control,
+.search{
+    width: 100%;
+    margin-right: 2vw;
+}
+.container-fluid{
+    display: flex;
+    justify-content: space-between; 
+}
+@media(max-width:500px){
+    .container-fluid{
+        display: flex;
+        flex-direction: column;
+    }
+    .logsig{
+        right: 12% !important;
+    }
+    .box1 li{
+        margin-left: 0 !important;
+        display: flex;
+        justify-content: space-evenly;
+    }
+    .fa-solid{
+        height: 80px !important;
+        width: 50px !important;
+    }
+    .icon-text{
+        margin: 0 !important;
+    }
+    .anc{
+        display: flex;
+        flex-wrap: wrap;
+    }
+}
+@media(max-width:999px){
+    .container-fluid{
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+    .nav-right{
+        display: flex;
+        flex-direction: column;
+    }
+    .anc{
+        display: flex;
+        justify-content: space-around;
+    }
+    .logsig{
+        position: absolute;
+        top:20% !important;
+    }
+}
+
 
 /*footer */
 .f-info{
@@ -104,11 +174,12 @@ html,css{
     height: 20vw;
     border:4px dotted skyblue;
     display: flex;
+    justify-content: space-evenly;
     padding: 2vw;
+    margin: 2vw;
 }
 .bottom1{
     display: flex;
-    flex-direction: column;
     flex-wrap: wrap;
     justify-content: center;
     align-items: center;
@@ -119,15 +190,29 @@ html,css{
     font-size: 2.5vw;
     font-weight: 800;
 }
-.bottom-btn{
+.bottom-btn1{
+    text-align: center;
+}
+.bottom-btn2{
     display: flex;
-    justify-content: center;
-    align-items: center;
     flex-wrap: wrap;
+    flex-direction: column;
 }
 .bottom-btn button{
     width: 15vw;
 }
+@media(max-width:635px){
+    .bottom1{
+        gap:5px;
+    }
+    .bottom-btn1{
+        height: 30%;
+    }
+    .bottom-btn2{
+        height: 30%;
+    }
+}
+
 
 /*signup & login*/
 .button{
@@ -169,4 +254,12 @@ html,css{
 .btn-text{
     text-decoration: none;
     color: inherit;
+}
+@media(max-width:999px){
+    .review-cont{
+        width: 100% !important;
+        margin: 0 !important;
+        display: flex;
+        flex-direction: row;
+    }
 }

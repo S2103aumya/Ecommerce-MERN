@@ -1,31 +1,36 @@
-<nav class="navbar navbar-expand border-bottom border-tertiary pe-3 p-3">
+<link rel="stylesheet" href="/css/style.css"/>
+
+<nav class="navbar navbar-expand border-bottom border-tertiary p-3">
   <div class="container-fluid">
-    <a href="/carts"><i class="fa-solid fa-m ms-3" style="color:orangered; font-weight: bold;"></i></a>
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse box" id="navbarSupportedContent" >
-      <ul class="navbar-nav mb-2 mb-lg-0">
-        <li class="nav-item ">
-          <a class="nav-link active men" aria-current="page" href="/carts/men"> Men</a>
-        </li>
-        <li class="nav-item ms-5">
-          <a class="nav-link women" href="/carts/women">Women</a>
-        </li>
-        <li class="nav-item ms-5">
-          <a class="nav-link kid" id="" href="/carts/kids">Kids</a>
-        </li>
-      </ul>
-      <div class="nav-right ms-auto">
-        <form class="d-flex" role="search">
-          <input class="form-control" type="search" placeholder="Search for products,brands and more" aria-label="Search" style="width: 350px;">
-        </form>
-        
-        <a class="icon-text profile "><i class="fa-regular fa-user"></i>Profile</a>
-        <a class="icon-text"><i class="fa-regular fa-heart"></i>Wishlist</a>
-        <a class="icon-text"><i class="fa-solid fa-bag-shopping"></i>Bag</a>
+      <div class="box1">
+        <a href="/carts"><i class="fa-solid fa-m" style="color:orangered; font-weight: bold;text-align: center;"></i></a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse box" id="navbarSupportedContent">
+          <ul class="navbar-nav mb-2 mb-lg-0">
+            <li class="nav-item ">
+              <a class="nav-link active men" aria-current="page" href="/carts/men"> Men</a>
+            </li>
+            <li class="nav-item ms-5">
+              <a class="nav-link women" href="/carts/women">Women</a>
+            </li>
+            <li class="nav-item ms-5">
+              <a class="nav-link kid" href="/carts/kids">Kids</a>
+            </li>
+          </ul>
+        </div>
       </div>
-    </div>
+      <div class="nav-right">
+        <form  class="search" role="search">
+          <input class="form-control" type="search" placeholder="Search for products,brands and more" aria-label="Search">
+        </form> 
+        <div class="anc">
+          <a class="icon-text"><i class="fa-regular fa-user"></i>Profile</a>
+          <a class="icon-text ms-2"><i class="fa-regular fa-heart"></i>Wishlist</a>
+          <a class="icon-text ms-2"><i class="fa-solid fa-bag-shopping"></i>Bag</a>
+        </div>
+      </div>
   </div>
 </nav>
 
@@ -45,6 +50,4 @@
           <a href="/logout" class="btn-text"><b>Logout</b></a></span></button>
   <% } %>
 </div>
-
-
-<script src="js/script.js"></script>
+<script src="/js/script.js"></script>

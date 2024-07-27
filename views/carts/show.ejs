@@ -1,4 +1,20 @@
 <% layout("layouts/boilerplate") %>
+<style>
+    @media(max-width:500px){
+    .review-cont{
+        width: 100% !important;
+        margin: 0 !important;
+        display: flex !important;
+        flex-direction: row !important;
+        flex-wrap: wrap !important;
+    }
+    .review-cont .card {
+        flex: 0 0 100%; /* Make each card take up the full width */
+        margin: 0.5rem 0; /* Add some margin for spacing */
+    }
+}
+</style>
+
 
 <div class="p-3 mt-3 bg-body-tertiary">
     <div class="card mb-3 col-7 offset-2 p-2" style="max-width: 600px;">
@@ -62,8 +78,8 @@
     </div>
     <hr>
 
-        <h3 class="col-8 offset-2"><b>All review</b></h3>
-        <div class="row col-8 offset-2 mb-2">
+        <h3 class="col-8 offset-2"><b>All reviews</b></h3>
+        <div class="row review-cont col-8 offset-2 mb-2">
         <% for(review of cart.reviews) { %>
             <div class="card col-5 ms-2 mb-3">
                 <div class="card-body">
@@ -73,7 +89,7 @@
                   <p class="card-text"><%= review.createdAt %></p>
                 </div>
                 <form method="POST" action="/carts/<%= cart.id%>/reviews/<%=review.id%>?_method=DELETE">
-                    <button class="btn btn-dark col-4 mb-1">Delete</button>
+                    <button class="btn btn-dark mb-1">Delete</button>
                 </form>
               </div>
         <% } %> 
@@ -81,4 +97,4 @@
 
 </div>
 
-<script src="../public/js/script.js"></script>
+<!-- <script src="/js/script.js"></script> -->

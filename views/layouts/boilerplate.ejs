@@ -10,6 +10,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"/>
     <link rel="stylesheet" href="/css/style.css"/>
     <link rel="stylesheet" href="/css/rating.css">
+    <link rel="stylesheet" href="/css/show.css">
 </head>
 <body>
     <%- include("../includes/navbar.ejs") %>
@@ -17,6 +18,24 @@
         <div class="body-con">
             <%- include("../includes/flash.ejs") %>
             <%- body %>
+        </div>
+    </div>
+    <div>
+        <div class="bottom-cont">
+            <img src="/images/myntrabottom.png" />
+            <div class="bottom1">
+                <div class="bottom-btn1">
+                <h1>MORE KNOCKOUT OFFERS WAITING</h1>
+                <h4>Only on <i class="fa-solid fa-m" style="color:orangered; font-weight: bold;"></i> app</h4>
+                </div>
+                <div class="bottom-btn2">
+                    <h4>Download Now</h4>
+                    <div class="buttons">
+                    <button type="button" class="btn btn-light">Get it on<br><b>Google Play</b></button>
+                    &nbsp&nbsp<button type="button" class="btn btn-light">Download on the<br><b>App Store</b></button>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
     <%- include("../includes/footer.ejs") %>

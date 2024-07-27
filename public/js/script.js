@@ -30,5 +30,6 @@
   profile.addEventListener("mouseout", () => {
     showtimeout= setTimeout(() => {
     logsig.style.visibility = "hidden";
-    },5000);
+    },3000);
   });
+  
