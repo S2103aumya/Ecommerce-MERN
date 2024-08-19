@@ -2,7 +2,7 @@
 
 let sampleCarts = [
   {
-    title: "Striped Flutter Sleeve Overlap Collar Peplum Hem Blouse",
+    title: "Striped Flutter Sleeve Overlap Collar Peplum Hem Jacket",
     description:"Chic and feminine, this blouse features flutter sleeves, an overlap collar, and a peplum hem with striped detailing.",
     image: "../images/product_1.png",
     price: 500.0,

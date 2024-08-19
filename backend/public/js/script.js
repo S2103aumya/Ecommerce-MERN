@@ -23,6 +23,7 @@
   let showtimeout;
   
   profile.addEventListener("mouseover",()=>{
+    console.log("clicked");
     clearTimeout(showtimeout);
     logsig.style.visibility = " visible";
   });

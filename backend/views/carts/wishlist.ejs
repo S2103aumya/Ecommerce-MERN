@@ -1,0 +1,39 @@
+<% layout("layouts/boilerplate") %>
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wishlist Page</title>
+</head>
+<body>
+    <div class="container full-height bg-body-tertiary p-5 d-flex flex-column">
+        <h5 class="mb-5">My Wishlist <span style="font-size: 17px;font-weight: 400;"><%=itemCount%> items</span></h5> 
+        <div class="row g-4">
+                <% cartItems.forEach(cart => { %>
+                    <div class="col-md-4">
+                        <div class="card" style="width: 18rem;">
+                            <form method="POST" action="/carts/wishlist/view/<%=cart._id%>/delete">
+                                <button type="submit" class="btn btn-light text-end" style="border-radius: 50%; 
+                                z-index: 2;  position: absolute; top: 3px; right: 3px;width: auto; height: auto;padding: 5px;">
+                                    <i class="fa-solid fa-xmark p-1" style="font-size: 15px;"></i>
+                                </button>
+                            </form>
+                            <img src="<%= cart.image.replace('../', '/') %>" class="img-fluid rounded-start" alt="Product Image" style="height: 20rem; object-fit: cover; z-index: 1;">
+                            <div class="card-body">
+                            <p class="card-title"><%= cart.title %></p>
+                            <p class="card-text"><b>Rs.<%= cart.price%></b></p>
+                            </div>
+                            <form method="POST" action="/carts/addtobag/<%= cart._id %>">
+                                <div style="text-align: center;" class="border-top p-2">
+                                    <a class="btn btn-light" style="color: #ff3f6c;"><b>Move to Bag</b></a>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                <% }) %>
+        </div>
+    </div>
+</body>
+</html>

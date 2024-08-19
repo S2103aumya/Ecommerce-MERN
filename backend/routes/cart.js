@@ -32,7 +32,58 @@ router.route("/")
             } catch (e) {
                 next(e);
             }
-    }));
+        }))
+//wishlist
+router.post("/wishlist/:id",async(req,res)=> {
+        const cartItem = await Cart.findById(req.params.id);
+        if (!req.session.wishlist) {
+            req.session.wishlist = [];
+        }
+        req.session.wishlist.push(cartItem);
+        req.session.itemCount = req.session.wishlist.length;
+        req.flash("success","cart added to wishlist succesfully!");
+        // res.redirect(`/carts/${req.params.id}`);
+        res.redirect("/carts");
+});
+router.get("/wishlist/view",async(req,res)=>{
+    const cartItems = req.session.wishlist || [];
+    const itemCount= cartItems.length;
+    res.render("carts/wishlist.ejs",{cartItems,itemCount});
+});
+router.post("/wishlist/view/:id/delete",async(req,res)=>{
+    const cartItemId= req.params.id;
+    req.session.wishlist = req.session.wishlist.filter(item => item._id.toString() !== cartItemId);
+    req.session.itemCount = req.session.wishlist.length;
+    res.redirect('/carts/wishlist/view');
+})
+//viewbag
+router.post('/addtobag/:id', async (req, res) => {
+    const cartItem = await Cart.findById(req.params.id);
+    if (!cartItem) {
+        return res.redirect('/carts');
+    }
+
+    if (!req.session.cart) {
+        req.session.cart = [];
+    }
+    req.session.cart.push(cartItem);
+    req.session.itemCount = req.session.cart.length;
+    req.flash("success","cart added to bag successfully!");
+    res.redirect('/carts');
+});
+router.post('/viewbag/:id/delete',async(req,res)=>{
+    const cartItemId = req.params.id;
+    req.session.cart = req.session.cart.filter(item => item._id.toString() !== cartItemId);
+    req.session.itemCount = req.session.cart.length;
+    res.redirect('/carts/view');
+})
+router.get('/view', (req, res) => {
+    const cartItems = req.session.cart || []; // Get cart items from session
+    const itemCount = cartItems.length; // Get the number of items
+    const totalPrice = cartItems.reduce((sum, item) => sum + item.price, 0);
+    res.render('carts/viewbag.ejs', { cartItems, itemCount, totalPrice }); // Render the view with cart items and item count
+});
+
 router.get("/men", async (req, res) => {
     try {
         // Fetch items from the database where the category is "men"
@@ -116,5 +167,6 @@ router.get("/:id/edit",
     }
     res.render("carts/edit.ejs",{cart});
 }));
+
 
 module.exports=router;

@@ -19,23 +19,33 @@
 <div class="p-3 mt-3 bg-body-tertiary">
     <div class="card mb-3 col-7 offset-2 p-2" style="max-width: 600px;">
         <div class="row g-0">
-        <div class="col-md-4" style="height: 100%;">
-            <img src="<%= cart.image%>" class="img-fluid rounded-start" alt="...">
-        </div>
-        <div class="col-md-8">
-            <div class="card-body">
-            <h5 class="card-title"><%= cart.title %></h5>
-                <p><%= cart.description %></p>
-                <hr>
-                <p><b>&#8377;<%= cart.price %></b></p>
-                <p><%= cart.category %></p>
-                <button class="btn btn-danger"><b><i class="fa-solid fa-bag-shopping"></i>&nbsp ADD TO BAG</b></button>
-                <button class="btn btn-outline-dark"><b><i class="fa-regular fa-heart"></i>&nbsp WISHLIST</b></button>
+            <div class="col-md-4" style="height: 100%;">
+                <img src="<%= cart.image%>" class="img-fluid rounded-start" alt="..." style="height: 20rem; object-fit: cover;">
+            </div>
+            <div class="col-md-8">
+                <div class="card-body">
+                <h5 class="card-title"><%= cart.title %></h5>
+                    <p><%= cart.description %></p>
+                    <hr>
+                    <p><b>&#8377;<%= cart.price %></b></p>
+                    <p><%= cart.category %></p>
+                    <div class="box d-flex">
+                        <form method="POST" action="/carts/addtobag/<%= cart._id %>">
+                            <button type="submit" class="btn btn-danger">
+                                    <b><i class="fa-solid fa-bag-shopping"></i>&nbsp ADD TO BAG</b>
+                            </button>
+                        </form> &nbsp;&nbsp;
+                        <form method="POST" action="/carts/wishlist/<%= cart._id %>">
+                            <button class="btn btn-outline-dark" type="submit">
+                                <b><i class="fa-regular fa-heart"></i>&nbsp WISHLIST</b>
+                            </button>
+                        </form>
+                    </div>
+                </div>
             </div>
         </div>
-        </div>
     </div>
-    <% if(currUser) { %>
+    <% if(!currUser) { %>
         <div class="buttons col-6 offset-4">
             <a href="/carts/<%=cart._id%>/edit"><button class="btn btn-danger">edit</button></a>
             <form method="POST" action="/carts/<%=cart._id%>?_method=DELETE">

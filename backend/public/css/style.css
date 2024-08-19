@@ -175,7 +175,7 @@ html,body{
     border:4px dotted skyblue;
     display: flex;
     justify-content: space-evenly;
-    padding: 2vw;
+    padding: 1vw;
     margin: 2vw;
 }
 .bottom1{
@@ -183,7 +183,7 @@ html,body{
     flex-wrap: wrap;
     justify-content: center;
     align-items: center;
-    padding: 1vw;
+    padding: 0.5vw;
 }
 .bottom1 h1{
     color: rgb(22, 117, 151);
@@ -197,19 +197,28 @@ html,body{
     display: flex;
     flex-wrap: wrap;
     flex-direction: column;
+    align-items: center;
 }
 .bottom-btn button{
-    width: 15vw;
+    width: 20%;
 }
-@media(max-width:635px){
+@media(max-width:755px){
     .bottom1{
         gap:5px;
+        padding: 0;
+        justify-content: flex-start;
     }
     .bottom-btn1{
         height: 30%;
     }
     .bottom-btn2{
         height: 30%;
+    }
+    .bottom-btn2 h4{
+        text-align: center !important;
+    }
+    .button{
+        width: 20% !important;
     }
 }
 

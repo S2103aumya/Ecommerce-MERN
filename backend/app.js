@@ -57,12 +57,7 @@ app.use(express.static(path.join(__dirname,"public")));
 app.use(methodOverride("_method"));
 app.engine("ejs",ejsMate);
 app.use("/frontend",express.static("frontend.js"));
-
-
-
-app.get("/",(req,res)=>{
-    res.redirect("/carts");
-});
+app.use(express.static(path.join(__dirname, '../frontend/dist')));
 
 const store = MongoStore.create({
     mongoUrl: dbUrl,
@@ -98,6 +93,38 @@ passport.use(new LocalStrategy(User.authenticate()));
 passport.serializeUser(User.serializeUser());
 passport.deserializeUser(User.deserializeUser());
 
+
+app.use((req,res,next)=>{
+    res.locals.currUser=req.user;
+    res.locals.success= req.flash("success");
+    res.locals.error= req.flash("error");
+    next();
+});
+
+app.use((req, res, next) => {
+    const itemCount = req.session.cart ? req.session.cart.length : 0;
+    res.locals.itemCount = itemCount;
+    const wishlistCount = req.session.wishlist ? req.session.wishlist.length : 0;
+    res.locals.wishlistCount = wishlistCount;
+    next();
+});
+
+app.use("/carts",cartRouter);
+app.use("/carts/:id/reviews",reviewRouter);
+app.use("/",userRouter);
+
+
+app.get("/api/test", (req, res) => {
+    res.json({ message: "Backend is connected!" });
+});
+app.get("/",(req,res)=>{
+    res.redirect("/carts");
+});
+
+app.get("*", (req, res) => {
+    res.sendFile(path.join(__dirname, "../frontend/dist", "index.html"));
+});
+
 // app.get("/testcart",async(req,res)=>{
 //     let samplecart = new Cart({
 //         title:"redjacket",
@@ -111,20 +138,10 @@ passport.deserializeUser(User.deserializeUser());
 //     res.send("successful");
 // });
 
-app.use((req,res,next)=>{
-    res.locals.currUser=req.user;
-    res.locals.success= req.flash("success");
-    res.locals.error= req.flash("error");
-    next();
-});
 
 app.locals.formatDate = function(date) {
     return moment(date).format('MMMM Do YYYY');
 };
-
-app.use("/carts",cartRouter);
-app.use("/carts/:id/reviews",reviewRouter);
-app.use("/",userRouter);
 
 app.all("*",(req,res,next)=>{
     next(new ExpressError(404,"Page Not found!"));

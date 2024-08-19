@@ -26,9 +26,16 @@
           <input class="form-control" type="search" placeholder="Search for products,brands and more" aria-label="Search">
         </form> 
         <div class="anc">
-          <a class="icon-text"><i class="fa-regular fa-user"></i>Profile</a>
-          <a class="icon-text ms-2"><i class="fa-regular fa-heart"></i>Wishlist</a>
-          <a class="icon-text ms-2"><i class="fa-solid fa-bag-shopping"></i>Bag</a>
+          <a class="icon-text me-2"><i class="fa-regular fa-user"></i>Profile</a>
+          <a class="icon-text ms-2 me-2" href="/carts/wishlist/view"><i class="fa-regular fa-heart"></i><span class="badge bg-danger"
+            style="position: absolute; top: 13px; right: 98px;font-size: 0.75rem; width: 1rem; height: 1rem; background-color: red; color: white;border-radius: 50%;display: flex; align-items: center; justify-content: center;">
+        <%= wishlistCount %>
+      </span>Wishlist</a>
+          <a  class="icon-text ms-2 me-2" href="/carts/view"><i class="fa-solid fa-bag-shopping"></i><span class="badge bg-danger"
+            style="position: absolute; top: 13px; right: 27px;font-size: 0.75rem; width: 1rem; height: 1rem; background-color: red; color: white;border-radius: 50%;display: flex; align-items: center; justify-content: center;">
+        <%= itemCount %>
+      </span>Bag
+    </a>
         </div>
       </div>
   </div>
@@ -37,7 +44,7 @@
 <div class="logsig">
   <p><b>Welcome</b></p>
   <p>To access account and manage orders</p>
-  <% if(!currUser) { %>
+  <% if(!currUser ) { %>
     <button class="btn btn-outline-light">
       <span style="color:rgb(238, 112, 133);">
         <a href="/signup" class="btn-text"><b>SignUp</b></a></span></button>
@@ -50,4 +57,5 @@
           <a href="/logout" class="btn-text"><b>Logout</b></a></span></button>
   <% } %>
 </div>
+
 <script src="/js/script.js"></script>
