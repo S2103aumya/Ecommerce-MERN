@@ -19,7 +19,7 @@
   })()
 
   let logsig = document.querySelector(".logsig");
-  let profile = document.querySelector(".profile");
+  let profile = document.querySelector(".Profile");
   let showtimeout;
   
   profile.addEventListener("mouseover",()=>{

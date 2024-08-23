@@ -11,6 +11,56 @@ const multer = require("multer");
 const { storage } =require("../cloudconfig.js");
 const upload = multer({ storage });
 
+router.get('/view', (req, res) => {
+    const cartItems = req.session.cart || []; // Get cart items from session
+    const itemCount = cartItems.length; // Get the number of items
+    const totalPrice = cartItems.reduce((sum, item) => sum + item.price, 0);
+    res.render('carts/viewbag.ejs', { cartItems, itemCount, totalPrice }); // Render the view with cart items and item count
+});
+router.get("/savedaddress",async(req,res)=>{
+    const cartItems = req.session.cart || [];
+    const addressItems = req.session.savedAddresses || [];
+    const index = req.body;
+    res.render("carts/savedaddress.ejs", { cartItems, addressItems, index });
+})
+router.post("/addresses",async(req,res)=>{
+    if (!req.session.address) {
+        req.session.address = [];
+    }
+    if (!req.session.savedAddresses) {
+        req.session.savedAddresses = [];
+    }
+    const addressData= {
+        name: req.body.name,
+        mobile: req.body.mobileno,
+        pincode: req.body.pincode,
+        street: req.body.street,
+        town: req.body.town,
+        city: req.body.city,
+        state: req.body.state,
+        saveAs: req.body.saveAs || "Home"
+    }
+    if (req.body.defaultAddress) {
+        req.session.defaultAddress = addressData;
+    }
+    req.session.savedAddresses.push(addressData);
+    res.redirect("/carts/savedaddress");
+})
+router.post("/address/delete",async(req,res)=> {
+    const { name, mobile } = req.body;
+    req.session.savedAddresses = req.session.savedAddresses.filter(address => 
+        !(address.name === name && address.mobile === mobile))
+    res.redirect("/carts/savedaddress");
+})
+router.get("/checkout",async(req,res)=>{
+    const cartItems = req.session.cart || [];
+    res.render("carts/Payment.ejs",{cartItems});
+})
+router.get("/checkoutconfirm",async(req,res)=>{
+    const address= req.session.savedAddresses || [];
+    console.log(address);
+    res.render("carts/checkoutconfirm.ejs",{address});
+})
 router.route("/")
     .get(async(req,res)=>{
         let carts= await Cart.find({});
@@ -33,85 +83,14 @@ router.route("/")
                 next(e);
             }
         }))
-//wishlist
-router.post("/wishlist/:id",async(req,res)=> {
-        const cartItem = await Cart.findById(req.params.id);
-        if (!req.session.wishlist) {
-            req.session.wishlist = [];
-        }
-        req.session.wishlist.push(cartItem);
-        req.session.itemCount = req.session.wishlist.length;
-        req.flash("success","cart added to wishlist succesfully!");
-        // res.redirect(`/carts/${req.params.id}`);
-        res.redirect("/carts");
-});
-router.get("/wishlist/view",async(req,res)=>{
-    const cartItems = req.session.wishlist || [];
-    const itemCount= cartItems.length;
-    res.render("carts/wishlist.ejs",{cartItems,itemCount});
-});
-router.post("/wishlist/view/:id/delete",async(req,res)=>{
-    const cartItemId= req.params.id;
-    req.session.wishlist = req.session.wishlist.filter(item => item._id.toString() !== cartItemId);
-    req.session.itemCount = req.session.wishlist.length;
-    res.redirect('/carts/wishlist/view');
-})
-//viewbag
-router.post('/addtobag/:id', async (req, res) => {
-    const cartItem = await Cart.findById(req.params.id);
-    if (!cartItem) {
-        return res.redirect('/carts');
-    }
-
-    if (!req.session.cart) {
-        req.session.cart = [];
-    }
-    req.session.cart.push(cartItem);
-    req.session.itemCount = req.session.cart.length;
-    req.flash("success","cart added to bag successfully!");
-    res.redirect('/carts');
-});
-router.post('/viewbag/:id/delete',async(req,res)=>{
-    const cartItemId = req.params.id;
-    req.session.cart = req.session.cart.filter(item => item._id.toString() !== cartItemId);
-    req.session.itemCount = req.session.cart.length;
-    res.redirect('/carts/view');
-})
-router.get('/view', (req, res) => {
-    const cartItems = req.session.cart || []; // Get cart items from session
-    const itemCount = cartItems.length; // Get the number of items
-    const totalPrice = cartItems.reduce((sum, item) => sum + item.price, 0);
-    res.render('carts/viewbag.ejs', { cartItems, itemCount, totalPrice }); // Render the view with cart items and item count
-});
-
-router.get("/men", async (req, res) => {
-    try {
-        // Fetch items from the database where the category is "men"
-        const menItems = await Cart.find({ category: 'men' });
-        // console.log(menItems);
-        // Render the men.ejs template with the filtered items
-        res.render('carts/men.ejs', { carts: menItems });
-    } catch (err) {
-        console.error(err);
-        res.status(500).send("An error occurred while fetching men's items");
-    }
-});
-router.get("/women",async(req,res)=>{
-    const womenItems = await Cart.find({category: 'women'});
-    res.render('carts/women.ejs',{ carts: womenItems });
-});
-router.get("/kids",async(req,res)=>{
-    const kidsItems = await Cart.find({category: 'kid'});
-    res.render('carts/kids.ejs',{ carts: kidsItems });
-});
+        
 router.get("/carts/new",isLoggedIn,(req,res)=>{
-    if(!req.isAuthenticated()){
-        req.flash("error","You must be logged in to add cart");
-        res.redirect("/login");
-    }
-    res.render("carts/new.ejs");
+        if(!req.isAuthenticated()){
+            req.flash("error","You must be logged in to add cart");
+            res.redirect("/login");
+        }
+        res.render("carts/new.ejs");
 });
-
 router.route("/:id")
     .get(async(req,res)=>{
         let { id } = req.params;
@@ -125,6 +104,12 @@ router.route("/:id")
             req.flash("error","Cart does not exist");
             res.redirect("/carts");
         }
+        if (!cart.owner) {
+            req.flash("error", "Cart owner not found");
+            return res.redirect("/carts");
+        }
+        console.log(cart.owner._id);
+        console.log(req.user._id);
         res.render("carts/show.ejs",{cart});
     })
     .put(upload.single('image'),validateCart, isLoggedIn, isOwner,
@@ -154,6 +139,87 @@ router.route("/:id")
          req.flash("success","cart deleted successfully!!");
          res.redirect("/carts");
      });
+
+//wishlist
+router.post("/wishlist/:id",async(req,res)=> {
+        const cartItem = await Cart.findById(req.params.id);
+        if (!req.session.wishlist) {
+            req.session.wishlist = [];
+        }
+        req.session.wishlist.push(cartItem);
+        req.session.itemCount = req.session.wishlist.length;
+        req.flash("success","cart added to wishlist succesfully!");
+        // res.redirect(`/carts/${req.params.id}`);
+        res.redirect("/carts");
+});
+router.get("/wishlist/view",async(req,res)=>{
+    const cartItems = req.session.wishlist || [];
+    const itemCount= cartItems.length;
+    res.render("carts/wishlist.ejs",{cartItems,itemCount});
+});
+router.post("/wishlist/view/:id/delete",async(req,res)=>{
+    const cartItemId= req.params.id;
+    req.session.wishlist = req.session.wishlist.filter(item => item._id.toString() !== cartItemId);
+    req.session.itemCount = req.session.wishlist.length;
+    res.redirect('/carts/wishlist/view');
+})
+//addresspage
+router.get("/address/view",async(req,res)=>{
+    const cartItemId= req.params.id;
+    const cartItems = req.session.cart || []; 
+    res.render("carts/address.ejs",{cartItems});
+});
+router.post("/address/add",async(req,res)=>{
+    if (!req.session.address) {
+        req.session.address = [];
+    }
+    req.session.address.push(...req.session.cart); // Add all items in the cart
+    res.redirect("/carts/address/view");
+})
+//address: saved address
+
+//viewbag
+router.post('/addtobag/:id', async (req, res) => {
+    const cartItem = await Cart.findById(req.params.id);
+    if (!cartItem) {
+        return res.redirect('/carts');
+    }
+
+    if (!req.session.cart) {
+        req.session.cart = [];
+    }
+    req.session.cart.push(cartItem);
+    req.session.itemCount = req.session.cart.length;
+    req.flash("success","cart added to bag successfully!");
+    res.redirect('/carts/view');
+});
+router.post('/viewbag/:id/delete',async(req,res)=>{
+    const cartItemId = req.params.id;
+    req.session.cart = req.session.cart.filter(item => item._id.toString() !== cartItemId);
+    req.session.itemCount = req.session.cart.length;
+    res.redirect('/carts/view');
+})
+
+router.get("/men", async (req, res) => {
+    try {
+        // Fetch items from the database where the category is "men"
+        const menItems = await Cart.find({ category: 'men' });
+        // console.log(menItems);
+        // Render the men.ejs template with the filtered items
+        res.render('carts/men.ejs', { carts: menItems });
+    } catch (err) {
+        console.error(err);
+        res.status(500).send("An error occurred while fetching men's items");
+    }
+});
+router.get("/women",async(req,res)=>{
+    const womenItems = await Cart.find({category: 'women'});
+    res.render('carts/women.ejs',{ carts: womenItems });
+});
+router.get("/kids",async(req,res)=>{
+    const kidsItems = await Cart.find({category: 'kid'});
+    res.render('carts/kids.ejs',{ carts: kidsItems });
+});
 
 router.get("/:id/edit",
     isLoggedIn,isOwner,

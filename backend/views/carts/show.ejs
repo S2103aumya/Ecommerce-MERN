@@ -45,14 +45,13 @@
             </div>
         </div>
     </div>
-    <% if(!currUser) { %>
+    <% if(currUser) { %>
         <div class="buttons col-6 offset-4">
             <a href="/carts/<%=cart._id%>/edit"><button class="btn btn-danger">edit</button></a>
             <form method="POST" action="/carts/<%=cart._id%>?_method=DELETE">
                 <button class="btn btn-dark">DELETE</button>
             </form>
         </div>
-    
     <% } %>
         
 

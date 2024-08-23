@@ -5,7 +5,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Wishlist Page</title>
+    <title>Wishlist</title>
 </head>
 <body>
     <div class="container full-height bg-body-tertiary p-5 d-flex flex-column">
@@ -27,7 +27,7 @@
                             </div>
                             <form method="POST" action="/carts/addtobag/<%= cart._id %>">
                                 <div style="text-align: center;" class="border-top p-2">
-                                    <a class="btn btn-light" style="color: #ff3f6c;"><b>Move to Bag</b></a>
+                                    <button type="submit" class="btn btn-light" style="color: #ff3f6c;"><b>Move to Bag</b></button>
                                 </div>
                             </form>
                         </div>

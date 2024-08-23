@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PAYMENT</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"/>
+</head>
+<body>
+    <style>
+        .container{
+            min-width: 50vh;
+        }
+        html, body {
+            height: 100%; /* Ensure body and html take full height */
+            margin: 0;
+            padding: 0;
+        }
+        .full-height {
+            display: flex;
+            align-items: flex-start;
+            justify-content: center;
+        }
+        .f-info {
+            min-height: 10vh;
+            margin-top: 3vw;
+        }
+        .f-info-bottom {
+            display: flex;
+            justify-content: space-evenly;
+            flex-wrap: wrap;
+            padding: 2vw;
+        }
+        .f-info-bottom a {
+            text-decoration: none;
+        }
+        .empty {
+            height: 60vh;
+            display: flex !important;
+            flex-direction: column;
+            justify-content: center !important;
+            align-items: center;
+            margin: 0 auto;
+        }
+    </style>
+    <nav class="navbar navbar-expand-lg d-flex justify-content-around align-items-center p-3">
+        <a href="/carts"><i class="fa-solid fa-m" style="color:orangered; font-weight: bold; text-align: center; font-size: 3vw;"></i></a> 
+         
+        <div class="div1" style="font-size: 15px;">
+            BAG----------ADDRESS-----------PAYMENT
+        </div>
+        <div class="div2" style="font-size: 15px;">
+            <img src="https://constant.myntassets.com/checkout/assets/img/sprite-secure.png" class="secureIcon" width="26" height="28">
+            100%&nbsp;&nbsp;&nbsp;SECURE
+        </div>
+    </nav>
+    <hr>
+    <div class="container full-height  p-3 d-flex">
+        <div class="col-md-8 p-4">
+            <h5>Choose Payment Method</h5>
+            <div class=" border border-secondary-subtle p-3 d-flex">
+                <div class="col-md-3 flex-grow-1 border-end">
+                    <p><i class="fa-regular fa-star"></i>
+                    <b><span style="color: #ff3f6c;" class="Recommended">Recommended</span></b></p>
+                    <div class=" d-flex p-1 flex-column bg-body-tertiary me-2">
+                        <p style="cursor: pointer;"><svg class="ms-auto" xmlns="http://www.w3.org/2000/svg" width="20" height="14" viewBox="0 0 24 16"><g fill="none" fill-rule="evenodd" transform="rotate(-6 29.622 -5.581)"><path stroke="#000" d="M19.938 1.386l1.03.072a1 1 0 0 1 .928 1.067l-.697 9.976a1 1 0 0 1-1.068.927L1.988 11.946"></path><rect width="20" height="12" stroke="#000" rx="1"></rect><path fill="#000" fill-rule="nonzero" d="M10.622 10l.744-.36-2.27-2.38c.216-.039.427-.101.633-.188.206-.086.394-.199.563-.336.17-.138.317-.3.441-.488.125-.188.214-.4.267-.637h1v-.798h-.992a1.612 1.612 0 0 0-.067-.234 2.82 2.82 0 0 0-.24-.5 1.462 1.462 0 0 0-.146-.204H12V3H8.122v.875h.559c.218 0 .414.025.588.075.174.05.325.117.454.204a1.276 1.276 0 0 1 .508.659h-2.11v.798h2.09c-.07.173-.179.32-.324.442a1.96 1.96 0 0 1-.488.298 3.005 3.005 0 0 1-1.063.23L8 7.198 10.622 10z"></path><path stroke="#000" d="M3 0c-.167.833-.5 1.5-1 2s-1.167.833-2 1M3 12c-.167-.833-.5-1.5-1-2S.833 9.167 0 9M17 0c.167.833.5 1.5 1 2s1.167.833 2 1M17 12c.167-.833.5-1.5 1-2s1.167-.833 2-1"></path></g></svg>
+                            <b>Cash On Delivery (Cash/UPI)</b>
+                        </p>
+                        <hr>
+                        <p  style="cursor: pointer;"><b><svg xmlns="http://www.w3.org/2000/svg" width="18" height="12" viewBox="0 0 20 14" prefix=""><g fill="none" fill-rule="evenodd" transform="translate(1 1)"><rect width="18" height="12" stroke="#000" rx="1"></rect><path fill="#000" d="M0 3h18v2H0z"></path><rect width="7" height="1" x="2" y="8" fill="#000" rx=".5"></rect></g></svg>
+                            <span class="credit">Credit/Debit Card</span></b></p>
+                    </div>
+                </div>
+                <div class="col-md-5 flex-grow-1 p-1">
+                    <p class="recom"><b>Recommended payment options</b></p>
+                    <div class="d-flex flex-column p-3">
+                        <div class="d-flex Cash" style="display: block;">
+                            <input style="margin-bottom: 15px;" type="checkbox" class="round-checkbox">
+                            <p class="ps-2"><b>Cash On Delivery (Cash/UPI)</b></p>
+                            <svg class="ms-auto"  xmlns="http://www.w3.org/2000/svg" width="20" height="14" viewBox="0 0 24 16"><g fill="none" fill-rule="evenodd" transform="rotate(-6 29.622 -5.581)"><path stroke="#000" d="M19.938 1.386l1.03.072a1 1 0 0 1 .928 1.067l-.697 9.976a1 1 0 0 1-1.068.927L1.988 11.946"></path><rect width="20" height="12" stroke="#000" rx="1"></rect><path fill="#000" fill-rule="nonzero" d="M10.622 10l.744-.36-2.27-2.38c.216-.039.427-.101.633-.188.206-.086.394-.199.563-.336.17-.138.317-.3.441-.488.125-.188.214-.4.267-.637h1v-.798h-.992a1.612 1.612 0 0 0-.067-.234 2.82 2.82 0 0 0-.24-.5 1.462 1.462 0 0 0-.146-.204H12V3H8.122v.875h.559c.218 0 .414.025.588.075.174.05.325.117.454.204a1.276 1.276 0 0 1 .508.659h-2.11v.798h2.09c-.07.173-.179.32-.324.442a1.96 1.96 0 0 1-.488.298 3.005 3.005 0 0 1-1.063.23L8 7.198 10.622 10z"></path><path stroke="#000" d="M3 0c-.167.833-.5 1.5-1 2s-1.167.833-2 1M3 12c-.167-.833-.5-1.5-1-2S.833 9.167 0 9M17 0c.167.833.5 1.5 1 2s1.167.833 2 1M17 12c.167-.833.5-1.5 1-2s1.167-.833 2-1"></path></g></svg>
+                        </div>
+                        <div class="toshow" style="display: none;">
+                            <p class="ps-3">for this option,there is a fee of &#8377;10.You can Pay online to avoid this.</p>
+                            <form method="GET" action="/carts/checkoutconfirm">
+                                <button class="btn btn-light w-100" style="background-color: #ff3f6c;color: #fff;">PLACE ORDER</button>
+                            </form>
+                        </div>
+                        <div class="card ps-3" style="display: none;">
+                            <p class="para">Sorry, Not available now!!</p>
+                        </div>
+                    </div>    
+                </div>
+            </div>
+        </div>
+            <div class="col-md-4  p-5 border-start">
+                <div class="box2 w-100 d-flex flex-column">
+                    <% if(cartItems.length > 0)  { %>
+                        <div class="info" style="line-height: 10px;">
+                            <p style="color:#535766;"><b>PRICE DETAILS</b></p>
+                            <p>Total MRP<span style="float: right;">&#8377;<%= cartItems[0].price*2+20%></span></p>
+                            <p>Discount on MRP<span style="float: right;color: #03a685;;">-&#8377;<%= cartItems[0].price*2+20 - cartItems[0].price%></span></p>
+                            <p>Coupon Discount<span style="float: right; color:#ff3f6c">Apply Coupons</span></p>
+                            <p>Platform Fee<span style="color: #ff3f6c;"><b>Know More</b></span><span style="float: right;">&#8377;20</span></p>
+                            <p style="line-height: 15px;">Shipping Fee<span style="color: #ff3f6c;"><b>Know More</b></span><br><span style="float: right;color: #03a685;">FREE</span><span style="color:#535766; font-size: 12px;">Free shipping for you</span></p>
+                        </div>
+                        <hr>
+                        <h5>Total Amount<span style="float: right;">&#8377;<%= cartItems[0].price %></span></h5>
+                    <% } else { %>
+                        <p>Your bag is empty.</p>
+                    <% } %>
+                </div>
+            </div>
+    </div>
+    <footer>
+        <div class="f-info bg-body-tertiary border-top">
+            <div class="f-info-bottom">
+                <div class="images"> 
+                    <img class="footer-bank-ssl" src="https://constant.myntassets.com/checkout/assets/img/footer-bank-ssl.png" width="70" height="37"> 
+                    <img class="footer-bank-visa" src="https://constant.myntassets.com/checkout/assets/img/footer-bank-visa.png" width="60" height="37">
+                     <img class="footer-bank-mc" src="https://constant.myntassets.com/checkout/assets/img/footer-bank-mc.png" width="60" height="37"> 
+                     <img class="footer-bank-ae" src="https://constant.myntassets.com/checkout/assets/img/footer-bank-ae.png" width="60" height="37"> 
+                     <img class="footer-bank-dc" src="https://constant.myntassets.com/checkout/assets/img/footer-bank-dc.png" width="60" height="37"> 
+                     <img class="footer-bank-nb" src="https://constant.myntassets.com/checkout/assets/img/footer-bank-nb.png" width="60" height="37"> 
+                     <img class="footer-bank-cod" src="https://constant.myntassets.com/checkout/assets/img/footer-bank-cod.png" width="60" height="37"> 
+                     <img class="footer-bank-rupay" src="https://constant.myntassets.com/checkout/assets/img/footer-bank-rupay.png" width="60" height="37">
+                      <img class="footer-bank-paypal" src="https://constant.myntassets.com/checkout/assets/img/footer-bank-paypal.png" width="60" height="37"> 
+                      <img class="footer-bank-bhim" src="https://constant.myntassets.com/checkout/assets/img/footer-bank-bhim.png" width="60" height="37"> </div>
+                <p>Need help? <a href="/"><b>Contact Us</b></a></p>
+            </div>
+        </div>
+    </footer>
+    <script>
+        let toshow = document.querySelector(".toshow");
+        let checkbox= document.querySelector(".round-checkbox");
+        let credit= document.querySelector(".credit");
+        let cash= document.querySelector(".Cash");
+        let recom= document.querySelector(".recom");
+        let card= document.querySelector(".card");
+        let para= document.querySelector(".para");
+        
+        checkbox.addEventListener("change",()=>{
+            if (event.target.checked) {
+                toshow.style.display= "block";
+                para.style.display= "none";
+                event.target.disabled = true;
+            } else {
+                toshow.style.display = "none"; // Hide the element when unchecked
+            }
+
+        });
+
+        credit.addEventListener("click",()=>{
+            cash.style.display= "none";
+            card.style.display= "block";
+            recom.style.display= "none";
+        })
+    </script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

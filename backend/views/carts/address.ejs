@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ADDRESS</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"/>
+    <style>
+        html, body {
+            height: 100%; /* Ensure body and html take full height */
+            margin: 0;
+            padding: 0;
+        }
+        .full-height {
+            display: flex;
+            align-items: flex-start;
+            justify-content: center;
+        }
+        .f-info {
+            min-height: 10vh;
+            margin-top: 5vw;
+        }
+        .f-info-bottom {
+            display: flex;
+            justify-content: space-evenly;
+            flex-wrap: wrap;
+            padding: 2vw;
+        }
+        .f-info-bottom a {
+            text-decoration: none;
+        }
+        .empty {
+            height: 80vh;
+            display: flex !important;
+            flex-direction: column;
+            justify-content: center !important;
+            align-items: center;
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg d-flex justify-content-around align-items-center p-3">
+        <a href="/carts"><i class="fa-solid fa-m" style="color:orangered; font-weight: bold; text-align: center; font-size: 3vw;"></i></a> 
+        <div class="div1" style="font-size: 15px;">
+            BAG----------ADDRESS-----------PAYMENT
+        </div>
+        <div class="div2" style="font-size: 15px;">
+            <img src="https://constant.myntassets.com/checkout/assets/img/sprite-secure.png" class="secureIcon" width="26" height="28">
+            100%&nbsp;&nbsp;&nbsp;SECURE
+        </div>
+    </nav>
+    <hr>
+    <div class="container bg-body-tertiary" style="min-height: 80vh;">
+        <div class="row d-flex justify-content-around  p-5">
+            <div class="col-md-6">
+                <form id="addressForm" method="POST" action="/carts/addresses" class="needs-validation" novalidate>
+                    <div class="box1 border d-flex flex-column p-3" style="line-height: 45px;">
+                        <h7><b>CONTACT DETAILS</b></h7>
+                        <div class="mb-3">
+                            <input placeholder="Name*" type="text" class="form-control" name="name" required>
+                            <div class="invalid-feedback">This is a mandatory field</div>
+                        </div>
+                        <input placeholder="Mobile No*" type="number" class="form-control" name="mobileno" required>
+                        <div class="mb-3">
+                            <p><b>ADDRESS</b></p>
+                            <input placeholder="pincode*" type="number" class="form-control" name="pincode" required>
+                        </div>
+                        <div class="mb-3">
+                            <input placeholder="Address(House No,Building,Street,Area)*" type="text" class="form-control" name="street" required>
+                        </div>
+                        <div class="mb-3">
+                            <input placeholder="Location/Town*" type="text" class="form-control" name="town" required>
+                        </div>
+                        <div class="d-flex justify-content-between mb-3">
+                            <input type="text" placeholder="City/District*"  class="border border-0" name="city" required>
+                            <input type="text" placeholder="State*"  class="border border-0" name="state" required>
+                        </div>
+                        <h6><b>SAVE ADDRESS AS</b></h6>
+                        <div class="d-flex gap-4">
+                            <button name="saveAs" class="btn btn-light border" style="border-radius: 20px;" type="button">Home</button>
+                            <button name="saveAs" class="btn btn-light border" style="border-radius: 20px;" type="button">Work</button>
+                        </div>
+                        <p class="mb-3 mt-3"><input type="checkbox" name="defaultAddress" value="true" class="me-2 border border-dark"/>Make this my default address</p>
+                        <form method="POST" action="/carts/addresses">
+                            <button class="btn btn-light w-100" style="color: #ffff; background-color: #ff3f6c;">ADD ADDRESS</button>
+                        </form>  
+                        </div>
+                </form>
+            </div>
+            <div class="col-md-4  p-4">
+                <div class="box2 w-100 d-flex flex-column" style="line-height: 20px; gap:10px;">
+                    <h7 style="color: rgb(83, 87, 102);;"><b>DELIVERY ESTIMATES</b></h7>
+                    <% if(cartItems.length > 0)  { %>
+                        <div class="d-flex align-items-center pt-3">
+                            <img src="<%= cartItems[0].image.replace('../', '/') %>" class="img-fluid rounded-start"  alt="product image" style="height: 45px; width: 45px;">
+                            &nbsp;&nbsp;<p>Delivery between</p>
+                        </div>
+                        <div class="info pt-3">
+                            <p style="color:#535766;"><b>PRICE DETAILS</b></p>
+                            <p>Total MRP<span style="float: right;">&#8377;<%= cartItems[0].price*2+20%></span></p>
+                            <p>Discount on MRP<span style="float: right;color: #03a685;;">-&#8377;<%= cartItems[0].price*2+20 - cartItems[0].price%></span></p>
+                            <p>Coupon Discount<span style="float: right; color:#ff3f6c">Apply Coupons</span></p>
+                            <p>Platform Fee<span style="color: #ff3f6c;"><b>Know More</b></span><span style="float: right;">&#8377;20</span></p>
+                            <p>Shipping Fee<span style="color: #ff3f6c;"><b>Know More</b></span><br><span style="float: right;color: #03a685;">FREE</span><span style="color:#535766; font-size: 10px;">Free shipping for you</span></p>
+                        </div>
+                        <hr>
+                        <h5>Total Amount<span style="float: right;">&#8377;<%= cartItems[0].price %></span></h5>
+                        <form method="POST" action="/carts/addresses">
+                            <button type="submit" class="btn btn-light w-100" style="background-color: #ff3f6c;color: #ffff;"><b>CONTINUE</b></button>
+                        </form>
+                    <% } else { %>
+                        <p>Your bag is empty.</p>
+                    <% } %>
+                </div>
+            </div>
+        </div>
+    </div>
+    <footer>
+        <div class="f-info bg-body-tertiary">
+            <div class="f-info-bottom">
+                <div class="images"> 
+                    <img class="footer-bank-ssl" src="https://constant.myntassets.com/checkout/assets/img/footer-bank-ssl.png" width="70" height="37"> 
+                    <img class="footer-bank-visa" src="https://constant.myntassets.com/checkout/assets/img/footer-bank-visa.png" width="60" height="37">
+                     <img class="footer-bank-mc" src="https://constant.myntassets.com/checkout/assets/img/footer-bank-mc.png" width="60" height="37"> 
+                     <img class="footer-bank-ae" src="https://constant.myntassets.com/checkout/assets/img/footer-bank-ae.png" width="60" height="37"> 
+                     <img class="footer-bank-dc" src="https://constant.myntassets.com/checkout/assets/img/footer-bank-dc.png" width="60" height="37"> 
+                     <img class="footer-bank-nb" src="https://constant.myntassets.com/checkout/assets/img/footer-bank-nb.png" width="60" height="37"> 
+                     <img class="footer-bank-cod" src="https://constant.myntassets.com/checkout/assets/img/footer-bank-cod.png" width="60" height="37"> 
+                     <img class="footer-bank-rupay" src="https://constant.myntassets.com/checkout/assets/img/footer-bank-rupay.png" width="60" height="37">
+                      <img class="footer-bank-paypal" src="https://constant.myntassets.com/checkout/assets/img/footer-bank-paypal.png" width="60" height="37"> 
+                      <img class="footer-bank-bhim" src="https://constant.myntassets.com/checkout/assets/img/footer-bank-bhim.png" width="60" height="37"> </div>
+                <p>Need help? <a href="/"><b>Contact Us</b></a></p>
+            </div>
+        </div>
+    </footer>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // JavaScript form validation
+        document.getElementById('addressForm').addEventListener('submit', function(event) {
+            const form = event.target;
+            if (!form.checkValidity()) {
+                event.preventDefault(); // Prevent form submission if validation fails
+                event.stopPropagation(); // Stop event propagation
+                form.classList.add('was-validated'); // Add validation feedback class
+            }
+        });
+    </script>
+</body>
+</html>

@@ -32,14 +32,14 @@
           
           <div class="mb-3">
             <% if (cart.image) { %>
-                <img src="<%= cart.image %>" alt="Cart Image" style="max-width: 20%; height: auto;"/>
+              <img src="<%= cart.image.replace('../', '/') %>" class="img-fluid rounded-start" alt="Product Image" style="height: 7rem;">
             <% } %>
         </div>
           <div class="mb-3">
-            <label for="imageUrl" class="form-label">Upload New Image</label>
+            <label for="imageUrl" class="form-label">Upload New Image :</label>
             <input
-              name="image" type="file"  class="form-control"/>
-              required
+              name="image" type="file"  class="form-control"
+              required/>
           </div> 
     
           <div class="row">
