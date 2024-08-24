@@ -9,11 +9,11 @@
 </head>
 <body>
     <style>
-        .container{
+        .container {
             min-width: 50vh;
         }
         html, body {
-            height: 100%; /* Ensure body and html take full height */
+            height: 100%;
             margin: 0;
             padding: 0;
         }
@@ -58,64 +58,66 @@
     <hr>
     <div class="container full-height bg-body-tertiary p-3 d-flex">
         <div class="col-md-8 p-4 border-end">
-            <div class="d-flex justify-content-between" >
+            <div class="alert alert-primary warn" role="alert" style="display: none;">
+                Select the address first!!
+              </div>
+            <div class="d-flex justify-content-between">
                 <h4>Select Delivery Address</h4>
-                <button class="btn btn-light" style="background-color: white;border: 1px solid black;"><b>ADD NEW ADDRESS</b></button>
+                <button class="btn btn-light" style="background-color: white; border: 1px solid black;"><b>ADD NEW ADDRESS</b></button>
             </div>
             <p style="color: #535766;"><b>DEFAULT ADDRESS</b></p>
-            <% addressItems.forEach(address  =>{ %>
+            <% addressItems.forEach((address,index)  => { %>
                 <div class="row g-4">
-                        <div class="border p-4 align-items-center">
-                            <div class="d-flex gap-3">
-                                <input type="checkbox">
-                                <p class="mb-2"><b><%= address.name %></b></p>
-                                <button class="btn btn-small p-1" style="border-radius: 20px;color: #0a6d59;border:1px solid #0a6d59;"><%= address.saveAs %></button>
+                    <div class="border p-4 align-items-center">
+                        <div class="d-flex gap-3">
+                            <input type="checkbox" name="selectedAddress" value="<%= index %>">
+                            <p class="mb-2"><b><%= address.name %></b></p>
+                            <button class="btn btn-small p-1" style="border-radius: 20px; color: #0a6d59; border: 1px solid #0a6d59;"><%= address.saveAs %></button>
+                        </div>
+                        <div class="p-3">
+                            <p><%= address.street %>, <%= address.town %>, <%= address.city %></p>
+                            <p><%= address.state %> - <%= address.pincode %></p>
+                            <p>Mobile: <%= address.mobile %></p>
+                            <div class="d-flex p-0 m-0">
+                                <ul><li></li></ul>
+                                <p>Pay on Delivery available</p>
                             </div>
-                            <div class="p-3">
-                                <p><%= address.street %>, <%= address.town %>, <%= address.city %></p>
-                                <p><%= address.state %> - <%=address.pincode%></p>
-                                <p>Mobile:<%= address.mobile%></p>
-                                <div class="d-flex p-0 m-0">
-                                    <ul><li></li></ul>
-                                    <p>Pay on Delivery available</p>
-                                </div>
-                            
-                                <div class="d-flex">
-                                    <form method="POST" action="/carts/address/delete">
-                                        <button class="btn btn-light border border-dark me-3" type="submit">Remove</button>
-                                    </form>
-                                    <button class="btn btn-light border border-dark">Edit</button>
-                                </div>
+                            <div class="d-flex">
+                                <form method="POST" action="/carts/address/delete">
+                                    <button class="btn btn-light border border-dark me-3" type="submit">Remove</button>
+                                </form>
+                                <button class="btn btn-light border border-dark">Edit</button>
                             </div>
                         </div>
+                    </div>
                 </div>
             <% }) %>
             <form method="POST" action="/carts/address/add">
-                <button class="btn btn-light w-100 mt-3 p-4" style="color: #ff3f6c;border: 2px dotted rgb(155, 141, 141);"><b>+Add New Address</b></button>
+                <button type="submit" class="btn btn-light w-100 mt-3 p-4" style="color: #ff3f6c; border: 2px dotted rgb(155, 141, 141);"><b>+Add New Address</b></button>
             </form>
         </div>
-        <div class="col-md-4  p-4">
-            <div class="box2 w-100 d-flex flex-column" style="line-height: 20px; gap:10px;">
-                <h7 style="color: rgb(83, 87, 102);;"><b>DELIVERY ESTIMATES</b></h7>
+        <div class="col-md-4 p-4">
+            <div class="box2 w-100 d-flex flex-column" style="line-height: 20px; gap: 10px;">
+                <h7 style="color: rgb(83, 87, 102);"><b>DELIVERY ESTIMATES</b></h7>
                 <% if(cartItems.length > 0)  { %>
                     <% cartItems.forEach(cart => { %>
                         <div class="d-flex align-items-center pt-3">
-                            <img src="<%= cart.image.replace('../', '/') %>" class="img-fluid rounded-start"  alt="product image" style="height: 45px; width: 45px;">
+                            <img src="<%= cart.image.replace('../', '/') %>" class="img-fluid rounded-start" alt="product image" style="height: 45px; width: 45px;">
                             &nbsp;&nbsp;<p>Delivery within 7-10 days</p>
                         </div>
                     <% }) %>
                     <div class="info pt-3" style="line-height: 10px;">
-                        <p style="color:#535766;"><b>PRICE DETAILS</b></p>
+                        <p style="color: #535766;"><b>PRICE DETAILS</b></p>
                         <p>Total MRP<span style="float: right;">&#8377;<%= totalPrice*2+20%></span></p>
-                        <p>Discount on MRP<span style="float: right;color: #03a685;;">-&#8377;<%= totalPrice*2+20 - totalPrice%></span></p>
-                        <p>Coupon Discount<span style="float: right; color:#ff3f6c">Apply Coupons</span></p>
+                        <p>Discount on MRP<span style="float: right; color: #03a685;">-&#8377;<%= totalPrice*2+20 - totalPrice %></span></p>
+                        <p>Coupon Discount<span style="float: right; color: #ff3f6c">Apply Coupons</span></p>
                         <p>Platform Fee<span style="color: #ff3f6c;"><b>Know More</b></span><span style="float: right;">&#8377;20</span></p>
-                        <p style="line-height: 15px;">Shipping Fee<span style="color: #ff3f6c;"><b>Know More</b></span><br><span style="float: right;color: #03a685;">FREE</span><span style="color:#535766; font-size: 12px;">Free shipping for you</span></p>
+                        <p style="line-height: 15px;">Shipping Fee<span style="color: #ff3f6c;"><b>Know More</b></span><br><span style="float: right; color: #03a685;">FREE</span><span style="color:#535766; font-size: 12px;">Free shipping for you</span></p>
                     </div>
                     <hr>
                     <h5>Total Amount<span style="float: right;">&#8377;<%= totalPrice %></span></h5>
-                    <form method="GET" action="/carts/checkout">
-                        <button type="submit" class="btn btn-light w-100" style="background-color: #ff3f6c;color: #ffff;"><b>CONTINUE</b></button>
+                    <form id="checkoutForm"  method="GET" action="/carts/checkout">
+                        <button onclick="checkAddressSelected(event)" type="submit"  class="btn btn-light w-100" style="background-color: #ff3f6c; color: #ffff;"><b>CONTINUE</b></button>
                     </form>
                 <% } else { %>
                     <p>Your bag is empty.</p>
@@ -129,19 +131,33 @@
                 <div class="images"> 
                     <img class="footer-bank-ssl" src="https://constant.myntassets.com/checkout/assets/img/footer-bank-ssl.png" width="70" height="37"> 
                     <img class="footer-bank-visa" src="https://constant.myntassets.com/checkout/assets/img/footer-bank-visa.png" width="60" height="37">
-                     <img class="footer-bank-mc" src="https://constant.myntassets.com/checkout/assets/img/footer-bank-mc.png" width="60" height="37"> 
-                     <img class="footer-bank-ae" src="https://constant.myntassets.com/checkout/assets/img/footer-bank-ae.png" width="60" height="37"> 
-                     <img class="footer-bank-dc" src="https://constant.myntassets.com/checkout/assets/img/footer-bank-dc.png" width="60" height="37"> 
-                     <img class="footer-bank-nb" src="https://constant.myntassets.com/checkout/assets/img/footer-bank-nb.png" width="60" height="37"> 
-                     <img class="footer-bank-cod" src="https://constant.myntassets.com/checkout/assets/img/footer-bank-cod.png" width="60" height="37"> 
-                     <img class="footer-bank-rupay" src="https://constant.myntassets.com/checkout/assets/img/footer-bank-rupay.png" width="60" height="37">
-                      <img class="footer-bank-paypal" src="https://constant.myntassets.com/checkout/assets/img/footer-bank-paypal.png" width="60" height="37"> 
-                      <img class="footer-bank-bhim" src="https://constant.myntassets.com/checkout/assets/img/footer-bank-bhim.png" width="60" height="37"> </div>
-                <p>Need help? <a href="/"><b>Contact Us</b></a></p>
+                    <img class="footer-bank-mc" src="https://constant.myntassets.com/checkout/assets/img/footer-bank-mc.png" width="60" height="37"> 
+                    <img class="footer-bank-ae" src="https://constant.myntassets.com/checkout/assets/img/footer-bank-ae.png" width="60" height="37"> 
+                    <img class="footer-bank-dc" src="https://constant.myntassets.com/checkout/assets/img/footer-bank-dc.png" width="60" height="37"> 
+                    <img class="footer-bank-nb" src="https://constant.myntassets.com/checkout/assets/img/footer-bank-nb.png" width="60" height="37"> 
+                    <img class="footer-bank-cod" src="https://constant.myntassets.com/checkout/assets/img/footer-bank-cod.png" width="60" height="37"> 
+                    <img class="footer-bank-rupay" src="https://constant.myntassets.com/checkout/assets/img/footer-bank-rupay.png" width="60" height="37"> 
+                    <img class="footer-bank-paypal" src="https://constant.myntassets.com/checkout/assets/img/footer-bank-paypal.png" width="60" height="37">
+                    <img class="footer-bank-bhim" src="https://constant.myntassets.com/checkout/assets/img/footer-bank-bhim.png" width="60" height="37"> 
+                    <img class="footer-bank-upi" src="https://constant.myntassets.com/checkout/assets/img/footer-bank-upi.png" width="60" height="37">
+                </div> 
             </div>
         </div>
     </footer>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        let  warn=document.querySelector(".warn");
+        function checkAddressSelected(event) {
+            const checkboxes = document.querySelectorAll('input[name="selectedAddress"]');
+            const isSelected = Array.from(checkboxes).some(checkbox => checkbox.checked);
+            
+            if (!isSelected) {
+                // alert("Please select a delivery address.");
+                warn.style.display="block";
+                event.preventDefault();
+            } else {
+                document.getElementById('checkoutForm').submit();
+            }
+        }
+    </script>
 </body>
 </html>

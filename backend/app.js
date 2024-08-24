@@ -24,9 +24,10 @@ const MongoStore = require('connect-mongo');
 const {saveRedirectUrl} = require("./middleware.js");
 
 
-const cartRouter=require("./routes/cart.js");
-const reviewRouter=require("./routes/review.js");
-const userRouter=require("./routes/user.js");
+const cartRouter=require("./routes/cartroute.js");
+const categoryRouter=require("./routes/categoryroute.js");
+const reviewRouter=require("./routes/reviewroute.js");
+const userRouter=require("./routes/userroute.js");
 
 // const MONGO_URL = "mongodb://127.0.0.1:27017/ecommerce"
 
@@ -110,6 +111,7 @@ app.use((req, res, next) => {
 });
 
 app.use("/carts",cartRouter);
+app.use("/category",categoryRouter);
 app.use("/carts/:id/reviews",reviewRouter);
 app.use("/",userRouter);
 
@@ -118,7 +120,8 @@ app.get("/api/test", (req, res) => {
     res.json({ message: "Backend is connected!" });
 });
 app.get("/",(req,res)=>{
-    res.redirect("/carts");
+    // res.redirect("/carts");
+    res.send("working");
 });
 
 app.get("*", (req, res) => {

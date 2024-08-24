@@ -11,6 +11,8 @@ const multer = require("multer");
 const { storage } =require("../cloudconfig.js");
 const upload = multer({ storage });
 
+
+
 router.get('/view', (req, res) => {
     const cartItems = req.session.cart || []; // Get cart items from session
     const itemCount = cartItems.length; // Get the number of items
@@ -19,9 +21,10 @@ router.get('/view', (req, res) => {
 });
 router.get("/savedaddress",async(req,res)=>{
     const cartItems = req.session.cart || [];
+    const index=req.body;
     const addressItems = req.session.savedAddresses || [];
     const totalPrice = cartItems.reduce((sum, item) => sum + item.price, 0);
-    res.render("carts/savedaddress.ejs", { cartItems, addressItems, totalPrice });
+    res.render("carts/savedaddress.ejs", { cartItems, addressItems, totalPrice, });
 })
 router.post("/addresses",async(req,res)=>{
     if (!req.session.address) {
@@ -30,7 +33,6 @@ router.post("/addresses",async(req,res)=>{
     if (!req.session.savedAddresses) {
         req.session.savedAddresses = [];
     }
-    req.session.savedAddresses = [];
     const addressData= {
         name: req.body.name,
         mobile: req.body.mobileno,
@@ -53,15 +55,21 @@ router.post("/address/delete",async(req,res)=> {
         !(address.name === name && address.mobile === mobile))
     res.redirect("/carts/savedaddress");
 })
+//checkout
 router.get("/checkout",async(req,res)=>{
     const cartItems = req.session.cart || [];
-    res.render("carts/Payment.ejs",{cartItems});
+    const totalPrice= cartItems.reduce((sum,item)=> sum+item.price,0);
+    res.render("carts/Payment.ejs",{cartItems,totalPrice});
 })
+
 router.get("/checkoutconfirm",async(req,res)=>{
-    const address= req.session.savedAddresses || [];
-    console.log(address);
-    res.render("carts/checkoutconfirm.ejs",{address});
+    const selectedAddressId = req.body.selectedAddress;
+    const savedAddresses= req.session.savedAddresses || [];
+    const selectedAddress = savedAddresses.find(address => address.id === selectedAddressId);
+    console.log(selectedAddress);
+    res.render("carts/checkoutconfirm.ejs",{ address: selectedAddress });
 })
+
 router.route("/")
     .get(async(req,res)=>{
         let carts= await Cart.find({});
@@ -167,15 +175,12 @@ router.post("/wishlist/view/:id/delete",async(req,res)=>{
 })
 //addresspage
 router.get("/address/view",async(req,res)=>{
-    const cartItemId= req.params.id;
     const cartItems = req.session.cart || []; 
     const addressItems = req.session.savedAddresses || [];
     const totalPrice = cartItems.reduce((sum, item) => sum + item.price, 0);
-
     if(req.session.savedAddresses){
         res.render("carts/savedaddress.ejs", { cartItems, addressItems, totalPrice });
     }
-    console.log(addressItems);
     res.render("carts/address.ejs",{cartItems,totalPrice});
 });
 router.post("/address/add",async(req,res)=>{
@@ -208,27 +213,6 @@ router.post('/viewbag/:id/delete',async(req,res)=>{
     req.session.itemCount = req.session.cart.length;
     res.redirect('/carts/view');
 })
-
-router.get("/men", async (req, res) => {
-    try {
-        // Fetch items from the database where the category is "men"
-        const menItems = await Cart.find({ category: 'men' });
-        // console.log(menItems);
-        // Render the men.ejs template with the filtered items
-        res.render('carts/men.ejs', { carts: menItems });
-    } catch (err) {
-        console.error(err);
-        res.status(500).send("An error occurred while fetching men's items");
-    }
-});
-router.get("/women",async(req,res)=>{
-    const womenItems = await Cart.find({category: 'women'});
-    res.render('carts/women.ejs',{ carts: womenItems });
-});
-router.get("/kids",async(req,res)=>{
-    const kidsItems = await Cart.find({category: 'kid'});
-    res.render('carts/kids.ejs',{ carts: kidsItems });
-});
 
 router.get("/:id/edit",
     isLoggedIn,isOwner,
