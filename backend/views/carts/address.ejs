@@ -52,6 +52,9 @@
     </nav>
     <hr>
     <div class="container bg-body-tertiary" style="min-height: 80vh;">
+        <div class="alert alert-warning btn alert-dismissible fade show" role="alert" style="display: none;">
+            fill the address first!!
+          </div>
         <div class="row d-flex justify-content-around  p-5">
             <div class="col-md-6">
                 <form id="addressForm" method="POST" action="/carts/addresses" class="needs-validation" novalidate>
@@ -78,8 +81,8 @@
                         </div>
                         <h6><b>SAVE ADDRESS AS</b></h6>
                         <div class="d-flex gap-4">
-                            <button name="saveAs" class="btn btn-light border" style="border-radius: 20px;" type="button">Home</button>
-                            <button name="saveAs" class="btn btn-light border" style="border-radius: 20px;" type="button">Work</button>
+                            <button name="saveAs" class="btn btn-light border" style="border-radius: 20px;" type="button" onclick="toggleColor(this)">Home</button>
+                            <button name="saveAs" class="btn btn-light border" style="border-radius: 20px;" type="button" onclick="toggleColor(this)">Work</button>
                         </div>
                         <p class="mb-3 mt-3"><input type="checkbox" name="defaultAddress" value="true" class="me-2 border border-dark"/>Make this my default address</p>
                         <form method="POST" action="/carts/addresses">
@@ -92,22 +95,24 @@
                 <div class="box2 w-100 d-flex flex-column" style="line-height: 20px; gap:10px;">
                     <h7 style="color: rgb(83, 87, 102);;"><b>DELIVERY ESTIMATES</b></h7>
                     <% if(cartItems.length > 0)  { %>
+                        <% cartItems.forEach(cart => { %>
                         <div class="d-flex align-items-center pt-3">
-                            <img src="<%= cartItems[0].image.replace('../', '/') %>" class="img-fluid rounded-start"  alt="product image" style="height: 45px; width: 45px;">
-                            &nbsp;&nbsp;<p>Delivery between</p>
+                            <img src="<%= cart.image.replace('../', '/') %>" class="img-fluid rounded-start"  alt="product image" style="height: 45px; width: 45px;">
+                            &nbsp;&nbsp;<p>Delivery within 7-10 Days</p>
                         </div>
+                        <% }) %>
                         <div class="info pt-3">
                             <p style="color:#535766;"><b>PRICE DETAILS</b></p>
-                            <p>Total MRP<span style="float: right;">&#8377;<%= cartItems[0].price*2+20%></span></p>
-                            <p>Discount on MRP<span style="float: right;color: #03a685;;">-&#8377;<%= cartItems[0].price*2+20 - cartItems[0].price%></span></p>
+                            <p>Total MRP<span style="float: right;">&#8377;<%= totalPrice*2+20%></span></p>
+                            <p>Discount on MRP<span style="float: right;color: #03a685;;">-&#8377;<%= totalPrice.price*2+20 - totalPrice.price%></span></p>
                             <p>Coupon Discount<span style="float: right; color:#ff3f6c">Apply Coupons</span></p>
                             <p>Platform Fee<span style="color: #ff3f6c;"><b>Know More</b></span><span style="float: right;">&#8377;20</span></p>
                             <p>Shipping Fee<span style="color: #ff3f6c;"><b>Know More</b></span><br><span style="float: right;color: #03a685;">FREE</span><span style="color:#535766; font-size: 10px;">Free shipping for you</span></p>
                         </div>
                         <hr>
-                        <h5>Total Amount<span style="float: right;">&#8377;<%= cartItems[0].price %></span></h5>
+                        <h5>Total Amount<span style="float: right;">&#8377;<%= totalPrice %></span></h5>
                         <form method="POST" action="/carts/addresses">
-                            <button type="submit" class="btn btn-light w-100" style="background-color: #ff3f6c;color: #ffff;"><b>CONTINUE</b></button>
+                            <button type="button" class="btn btn-light w-100" style="background-color: #ff3f6c;color: #ffff;"><b>CONTINUE</b></button>
                         </form>
                     <% } else { %>
                         <p>Your bag is empty.</p>
@@ -146,6 +151,22 @@
                 form.classList.add('was-validated'); // Add validation feedback class
             }
         });
+        let btn= document.querySelector(".btn");
+        btn.addEventListener("click",()=>{
+            btn.style.display= "block";
+        })
+        function toggleColor(button) {
+        // Check if the button currently has the `btn-light` class
+        if (button.classList.contains('btn-light')) {
+            // Remove the `btn-light` class and add the `btn-primary` class
+            button.classList.remove('btn-light');
+            button.classList.add('btn-secondary');
+        } else {
+            // If it doesn't have the `btn-light` class, toggle back to `btn-light`
+            button.classList.remove('btn-secondary');
+            button.classList.add('btn-light');
+        }
+    }
     </script>
 </body>
 </html>

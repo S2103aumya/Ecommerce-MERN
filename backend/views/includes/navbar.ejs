@@ -42,7 +42,11 @@
 </nav>
 
 <div class="logsig">
-  <p><b>Welcome</b></p>
+  <p><b>Hello <%=currUser.username%></b></p>
+  <hr>
+  <a>Wishlists</a></br>
+  <a>Contact Us</a>
+  <hr>
   <p>To access account and manage orders</p>
   <% if(!currUser ) { %>
     <button class="btn btn-outline-light">

@@ -35,9 +35,9 @@
                                     <b><i class="fa-solid fa-bag-shopping"></i>&nbsp ADD TO BAG</b>
                             </button>
                         </form> &nbsp;&nbsp;
-                        <form method="POST" action="/carts/wishlist/<%= cart._id %>">
-                            <button class="btn btn-outline-dark" type="submit">
-                                <b><i class="fa-regular fa-heart"></i>&nbsp WISHLIST</b>
+                        <form method="POST" action="/carts/wishlist/<%= cart._id %>"  id="wishlistForm">
+                            <button type="button" class="btn btn-outline-dark" onclick="onChange(this)">
+                                <b><i class="fa-regular fa-heart"></i>&nbsp <span class="button-text"> WISHLIST</span></b>
                             </button>
                         </form>
                     </div>
@@ -106,4 +106,17 @@
 
 </div>
 
-<!-- <script src="/js/script.js"></script> -->
+<script>
+    function onChange(button) {
+        // Check if the button currently has the `btn-light` class
+        if (button.classList.contains('btn-outline-dark')) {
+            // Remove the `btn-light` class and add the `btn-primary` class
+            button.classList.remove('btn-outline-dark');
+            button.classList.add('btn-secondary');
+            button.querySelector('.button-text').textContent = 'WISHLISTED';
+
+        }
+        document.getElementById('wishlistForm').submit();
+
+    }
+</script>

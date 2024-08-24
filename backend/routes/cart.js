@@ -20,8 +20,8 @@ router.get('/view', (req, res) => {
 router.get("/savedaddress",async(req,res)=>{
     const cartItems = req.session.cart || [];
     const addressItems = req.session.savedAddresses || [];
-    const index = req.body;
-    res.render("carts/savedaddress.ejs", { cartItems, addressItems, index });
+    const totalPrice = cartItems.reduce((sum, item) => sum + item.price, 0);
+    res.render("carts/savedaddress.ejs", { cartItems, addressItems, totalPrice });
 })
 router.post("/addresses",async(req,res)=>{
     if (!req.session.address) {
@@ -30,6 +30,7 @@ router.post("/addresses",async(req,res)=>{
     if (!req.session.savedAddresses) {
         req.session.savedAddresses = [];
     }
+    req.session.savedAddresses = [];
     const addressData= {
         name: req.body.name,
         mobile: req.body.mobileno,
@@ -142,6 +143,7 @@ router.route("/:id")
 
 //wishlist
 router.post("/wishlist/:id",async(req,res)=> {
+        let { id }= req.params;
         const cartItem = await Cart.findById(req.params.id);
         if (!req.session.wishlist) {
             req.session.wishlist = [];
@@ -150,7 +152,7 @@ router.post("/wishlist/:id",async(req,res)=> {
         req.session.itemCount = req.session.wishlist.length;
         req.flash("success","cart added to wishlist succesfully!");
         // res.redirect(`/carts/${req.params.id}`);
-        res.redirect("/carts");
+        res.redirect(`/carts/${id}`);
 });
 router.get("/wishlist/view",async(req,res)=>{
     const cartItems = req.session.wishlist || [];
@@ -167,7 +169,14 @@ router.post("/wishlist/view/:id/delete",async(req,res)=>{
 router.get("/address/view",async(req,res)=>{
     const cartItemId= req.params.id;
     const cartItems = req.session.cart || []; 
-    res.render("carts/address.ejs",{cartItems});
+    const addressItems = req.session.savedAddresses || [];
+    const totalPrice = cartItems.reduce((sum, item) => sum + item.price, 0);
+
+    if(req.session.savedAddresses){
+        res.render("carts/savedaddress.ejs", { cartItems, addressItems, totalPrice });
+    }
+    console.log(addressItems);
+    res.render("carts/address.ejs",{cartItems,totalPrice});
 });
 router.post("/address/add",async(req,res)=>{
     if (!req.session.address) {

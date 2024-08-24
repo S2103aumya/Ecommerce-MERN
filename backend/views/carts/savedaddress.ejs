@@ -90,26 +90,30 @@
                         </div>
                 </div>
             <% }) %>
-            <button class="btn btn-light w-100 mt-3 p-4" style="color: #ff3f6c;border: 2px dotted rgb(155, 141, 141);"><b>+Add New Address</b></button>
+            <form method="POST" action="/carts/address/add">
+                <button class="btn btn-light w-100 mt-3 p-4" style="color: #ff3f6c;border: 2px dotted rgb(155, 141, 141);"><b>+Add New Address</b></button>
+            </form>
         </div>
         <div class="col-md-4  p-4">
             <div class="box2 w-100 d-flex flex-column" style="line-height: 20px; gap:10px;">
                 <h7 style="color: rgb(83, 87, 102);;"><b>DELIVERY ESTIMATES</b></h7>
                 <% if(cartItems.length > 0)  { %>
-                    <div class="d-flex align-items-center pt-3">
-                        <img src="<%= cartItems[0].image.replace('../', '/') %>" class="img-fluid rounded-start"  alt="product image" style="height: 45px; width: 45px;">
-                        &nbsp;&nbsp;<p>Delivery between</p>
-                    </div>
+                    <% cartItems.forEach(cart => { %>
+                        <div class="d-flex align-items-center pt-3">
+                            <img src="<%= cart.image.replace('../', '/') %>" class="img-fluid rounded-start"  alt="product image" style="height: 45px; width: 45px;">
+                            &nbsp;&nbsp;<p>Delivery within 7-10 days</p>
+                        </div>
+                    <% }) %>
                     <div class="info pt-3" style="line-height: 10px;">
                         <p style="color:#535766;"><b>PRICE DETAILS</b></p>
-                        <p>Total MRP<span style="float: right;">&#8377;<%= cartItems[0].price*2+20%></span></p>
-                        <p>Discount on MRP<span style="float: right;color: #03a685;;">-&#8377;<%= cartItems[0].price*2+20 - cartItems[0].price%></span></p>
+                        <p>Total MRP<span style="float: right;">&#8377;<%= totalPrice*2+20%></span></p>
+                        <p>Discount on MRP<span style="float: right;color: #03a685;;">-&#8377;<%= totalPrice*2+20 - totalPrice%></span></p>
                         <p>Coupon Discount<span style="float: right; color:#ff3f6c">Apply Coupons</span></p>
                         <p>Platform Fee<span style="color: #ff3f6c;"><b>Know More</b></span><span style="float: right;">&#8377;20</span></p>
                         <p style="line-height: 15px;">Shipping Fee<span style="color: #ff3f6c;"><b>Know More</b></span><br><span style="float: right;color: #03a685;">FREE</span><span style="color:#535766; font-size: 12px;">Free shipping for you</span></p>
                     </div>
                     <hr>
-                    <h5>Total Amount<span style="float: right;">&#8377;<%= cartItems[0].price %></span></h5>
+                    <h5>Total Amount<span style="float: right;">&#8377;<%= totalPrice %></span></h5>
                     <form method="GET" action="/carts/checkout">
                         <button type="submit" class="btn btn-light w-100" style="background-color: #ff3f6c;color: #ffff;"><b>CONTINUE</b></button>
                     </form>
