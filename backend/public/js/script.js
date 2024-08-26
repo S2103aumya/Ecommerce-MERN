@@ -33,4 +33,3 @@
     logsig.style.visibility = "hidden";
     },3000);
   });
-  

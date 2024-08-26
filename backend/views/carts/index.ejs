@@ -1,16 +1,33 @@
 <% layout("/layouts/boilerplate") %>  
 
+<script src="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.js" defer></script>
+
 <div class="bg-body-tertiary">
-    <div class="top-cont mt-3">
-        <div class="top1">
-            <h1>WESTERN WEAR</h1>
-            <hr>
-            <h5>Min 30% Off</h5>
-            
+    <div class="top-cont mt-3" style="height: auto;">
+        <div class="swiper mySwiper" >
+            <div class="swiper-wrapper" style="height: 520px;">
+                <div class="swiper-slide">
+                   <img src="images/bgecom.png"/>
+                    <div class="top1">
+                        <h1>WESTERN WEAR</h1>
+                        <hr>
+                        <h5>Min 30% Off</h5>
+                    </div>
+                </div>
+                <div class="swiper-slide" style="filter: brightness(1) contrast(1.1);">
+                    <img src="https://images.unsplash.com/photo-1441984904996-e0b6ba687e04?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MjB8fGVjb21tZXJjZSUyMHNob3BwaW5nJTIwc2FsZXN8ZW58MHx8MHx8fDA%3D"/>
+                </div>
+                <div class="swiper-slide" >
+                    <!-- <img src="https://media.istockphoto.com/id/516820576/photo/woman-on-a-shopping-spree.webp?b=1&s=612x612&w=0&k=20&c=ZacYdI6L_Lxqem7M7pjg0hQuLoFlQB4EciEzMRTdKOo=0"/> -->
+                    <img src="https://images.unsplash.com/photo-1648544365094-3e3e35108a68?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8OHx8c2hvcHBpbmclMjBiYWdzfGVufDB8fDB8fHww"/>
+                </div>
+                <div class="swiper-slide" style="filter: brightness(1) contrast(1.1);">
+                    <img src="https://images.unsplash.com/photo-1483985988355-763728e1935b?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTZ8fHNob3BwaW5nfGVufDB8fDB8fHww"/>
+                </div>
+            </div>
+            <div class="swiper-pagination"></div>
         </div>
-        <img src="/images/bgecom.png" />
     </div>
-    
     <div class="shop">
         <h1>CRA<span style="color: red; font-size: 5.5vw;">Z</span>Y DEALS</h1>
         <h4 class="mb-2">Soak In The Savings</h4>
@@ -42,3 +59,15 @@
         </form>
     </div>
 </div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        var swiper = new Swiper(".mySwiper", {
+            pagination: {
+                el: ".swiper-pagination",
+                clickable: true,
+            },
+        });
+    });
+</script>
+ 
