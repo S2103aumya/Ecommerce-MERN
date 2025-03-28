@@ -1,1 +1,1 @@
-https://ecommerce-mern-s1w8.onrender.com
+https://ecommerce-mern-git-main-s2103aumyas-projects.vercel.app
