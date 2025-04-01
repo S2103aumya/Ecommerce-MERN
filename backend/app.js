@@ -112,9 +112,7 @@ app.use((req, res, next) => {
 const cors = require("cors"); // Import CORS at the top
 
 const allowedOrigins = [
-    "https://your-frontend-service.onrender.com", // Replace with your actual frontend URL
-    "http://localhost:5173",  // For local development (if using Vite)
-    "http://localhost:3000"   // If using Create React App
+    "https://ecommercemern-f.onrender.com"
 ];
 
 // Apply CORS middleware
@@ -133,8 +131,7 @@ app.get("/api/test", (req, res) => {
     res.json({ message: "Backend is connected!" });
 });
 app.get("/",(req,res)=>{
-    // res.redirect("/carts");
-    res.send("working");
+    res.redirect("/carts");
 });
 
 app.get("*", (req, res) => {
