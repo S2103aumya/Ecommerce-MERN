@@ -109,6 +109,19 @@ app.use((req, res, next) => {
     res.locals.wishlistCount = wishlistCount;
     next();
 });
+const cors = require("cors"); // Import CORS at the top
+
+const allowedOrigins = [
+    "https://your-frontend-service.onrender.com", // Replace with your actual frontend URL
+    "http://localhost:5173",  // For local development (if using Vite)
+    "http://localhost:3000"   // If using Create React App
+];
+
+// Apply CORS middleware
+app.use(cors({
+    origin: allowedOrigins,
+    credentials: true, // Allow sending cookies/session data
+}));
 
 app.use("/carts",cartRouter);
 app.use("/category",categoryRouter);
