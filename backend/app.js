@@ -113,7 +113,6 @@ const cors = require("cors"); // Import CORS at the top
 
 const allowedOrigins = [
     "https://ecommercemern-f.onrender.com"
-    "http://localhost:5173",  // For local development (if using Vite)
     "http://localhost:2103"   // If using Create React App
 ];
 
