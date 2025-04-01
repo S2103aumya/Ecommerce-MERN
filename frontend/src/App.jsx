@@ -9,6 +9,7 @@ const App = () => {
   const [itemCount, setItemCount] = useState(0);
   const [wishlistCount, setWishlistCount] = useState(0);
 
+    const API_BASE_URL = process.env.VITE_API_URL || "http://localhost:2103"; // Use VITE_API_URL for Vite
 
   useEffect(() => {
         fetch('/api/carts/itemCount')
@@ -18,7 +19,7 @@ const App = () => {
         fetch('/api/wishlist/itemCount') // Fetch wishlist item count
         .then(res => res.json())
         .then(data => setWishlistCount(data.itemCount));
-    }, []);
+    }, [API_BASE_URL]);
 
   return (
       <div>
