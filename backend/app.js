@@ -132,8 +132,7 @@ app.get("/api/test", (req, res) => {
     res.json({ message: "Backend is connected!" });
 });
 app.get("/",(req,res)=>{
-    // res.redirect("/carts");
-    res.send("working");
+    res.redirect("/carts");
 });
 
 app.get("*", (req, res) => {
