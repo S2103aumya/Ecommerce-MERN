@@ -112,9 +112,9 @@ app.use((req, res, next) => {
 const cors = require("cors"); // Import CORS at the top
 
 const allowedOrigins = [
-    "https://your-frontend-service.onrender.com", // Replace with your actual frontend URL
+    "https://ecommercemern-f.onrender.com"
     "http://localhost:5173",  // For local development (if using Vite)
-    "http://localhost:3000"   // If using Create React App
+    "http://localhost:2103"   // If using Create React App
 ];
 
 // Apply CORS middleware
